@@ -32,7 +32,7 @@ set(INCLUDES
 )
 
 set(DATA_FILES
-    data/lipids.json
+    data/repository.json
 )
 
 qt_add_executable(${APPLICATION_NAME}

@@ -1,25 +1,38 @@
 #include "irepository.h"
 #include "json_loader.h"
 
-IJsonRepository::IJsonRepository(QString source)
+IJsonRepository::IJsonRepository(QString source) : IRepository()
 {
     _source = std::move(source);
 }
 
-QMap<QString, LipidProfile> IJsonRepository::load()
+IRepository& IJsonRepository::load()
 {
-    QMap<QString, LipidProfile> profiles;
-
     QJsonDocument doc = JsonLoader().load(_source).document();
-    if(doc.isArray()) {
-        QJsonArray jsonArray = doc.array();
-        for(const auto& ar : jsonArray)
-            profiles.insert(ar.toObject().value("id").toString(), processObject(ar));
+
+    if(doc.isObject()) {
+        QJsonObject obj = doc.object();
+
+        QJsonArray lipids =  obj.value("lipids").toArray();
+        for(const auto& v : lipids) {
+            _repository.lipids.insert(v.toObject().value("id").toString(), toLipid(v));
+        }
+
+        QJsonArray acids =  obj.value("acids").toArray();
+        for(const auto& v : acids) {
+            _repository.acids.insert(v.toObject().value("id").toString(), toAcid(v));
+        }
+
+        QJsonArray additives =  obj.value("additives").toArray();
+        for(const auto& v : additives) {
+            _repository.additives.insert(v.toObject().value("id").toString(), toAdditive(v));
+        }
     }
-    return profiles;
+
+    return *this;
 }
 
-LipidProfile IJsonRepository::processObject(const QJsonValue& val)
+LipidProfile IJsonRepository::toLipid(const QJsonValue& val)
 {
     LipidProfile profile;
 
@@ -38,3 +51,30 @@ LipidProfile IJsonRepository::processObject(const QJsonValue& val)
 
     return profile;
 }
+
+AcidProfile IJsonRepository::toAcid(const QJsonValue &val)
+{
+    AcidProfile profile;
+
+    auto name = val.toObject().value("name");
+    profile.name.en = name.toObject().value("en").toString();
+    profile.name.ru = name.toObject().value("ru").toString();
+
+    auto neutralization = val.toObject().value("neutralization");
+    profile.neutralization.KOH = neutralization.toObject().value("KOH").toDouble();
+    profile.neutralization.NaOH = neutralization.toObject().value("NaOH").toDouble();
+
+    return profile;
+}
+
+AdditiveProfile IJsonRepository::toAdditive(const QJsonValue &val)
+{
+    AdditiveProfile profile;
+    auto name = val.toObject().value("name");
+    profile.name.en = name.toObject().value("en").toString();
+    profile.name.ru = name.toObject().value("ru").toString();
+    return profile;
+}
+
+
+

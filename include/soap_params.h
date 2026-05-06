@@ -27,7 +27,7 @@ struct RecipeInput {
 // Output - Выходные параметры
 struct ComponentOutput {
     QString id;
-    qreal mass;
+    qreal mass = 0;
 };
 
 struct MassParameters {
@@ -45,26 +45,37 @@ struct RecipeOutput {
 // Lipid data
 // Йодовое число
 struct Iodine {
-    qreal min;
-    qreal max;
-    qreal avg;
+    qreal min = 0;
+    qreal max = 0;
+    qreal avg = 0;
 };
 
 struct Sap {
-    qreal NaOH;
-    qreal KOH;
+    qreal NaOH = 0;
+    qreal KOH = 0;
 };
 
-struct LipidName {
+struct ComponentName {
     QString en;
     QString ru;
 };
 
 // Профиль каждого липида
 struct LipidProfile {
-    LipidName name;
+    ComponentName name;
     Sap sap;        // сапонификационное число
     Iodine iodine;  // йодовое значение
+};
+
+struct AdditiveProfile {
+    ComponentName name;
+    qreal usagePercent = 0;
+};
+
+struct AcidProfile {
+    ComponentName name;
+    Sap neutralization;
+    qreal usagePercent = 0;
 };
 
 #endif // SOAP-DATA_H

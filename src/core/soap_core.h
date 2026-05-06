@@ -27,11 +27,15 @@ private:
     void computeLipids();
     void computeWater();
     void computeLye();
+    void computeAcids();
+    void computeAdditives();
 
     RecipeInput _input;
     RecipeOutput _output;
 
     QMap<QString, LipidProfile> _lipidProfiles;
+    QMap<QString, AcidProfile> _acidProfiles;
+    QMap<QString, AdditiveProfile> _additiveProfiles;
 };
 
 #endif // SOAP_CORE_H

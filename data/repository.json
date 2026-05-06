@@ -1,0 +1,107 @@
+{
+    "lipids": [
+        {
+            "id" : "ID_olive_oil",
+            "type" : {
+                "en" : "Oil",
+                "ru" : "Жидкое масло"
+            },
+            "name" : {
+                "ru" : "Оливковое масло",
+                "en" : "Olive Oil"
+            },
+            "sap" : {
+                "NaOH" : 0.134,
+                "KOH" : 0.188
+            },
+            "iodine" : {
+                    "min" : 75,
+                    "max" : 94,
+                    "avg" : 85
+            }
+        },
+        {
+            "id" : "ID_shea_butter",
+            "type" : {
+                "en" : "Butter",
+                "ru" : "Твердое масло"
+            },
+            "name" : {
+                "ru" : "Масло ши",
+                "en" : "Shea butter"
+            },
+            "sap" : {
+                "NaOH" : 0.128,
+                "KOH" : 0.18
+            },
+            "iodine" : {
+                    "min" : 50,
+                    "max" : 70,
+                    "avg" : 60
+            }
+        },
+        {
+            "id" : "ID_stearic_acid",
+            "type" : {
+                "en" : "Fatty acid",
+                "ru" : "Жирная кислота"
+            },
+            "name" : {
+                "ru" : "Стеариновая кислота",
+                "en" : "Stearic acid"
+            },
+            "sap" : {
+                "NaOH" : 0.15,
+                "KOH" : 0.211
+            },
+            "iodine" : {
+                    "min" : 0,
+                    "max" : 0,
+                    "avg" : 0
+            }
+        },
+        {
+            "id" : "ID_lard",
+            "type" : {
+                "en" : "Animal Fat",
+                "ru" : "Животный жир"
+            },
+            "name" : {
+                "ru" : "Свиной жир",
+                "en" : "Lard"
+            },
+            "sap" : {
+                "NaOH" : 0.138,
+                "KOH" : 0.193
+            },
+            "iodine" : {
+                    "min" : 50,
+                    "max" : 70,
+                    "avg" : 60
+            }
+        }
+    ],
+    "acids" : [
+        {
+          "id": "ID_lactic_acid_80",
+          "name" : {
+              "ru" : "Молочная кислота 80%",
+              "en" : "Lactic acid 80%"
+          },
+          "neutralization" : {
+              "NaOH": 0.355,
+              "KOH": 0.498
+          }
+        }
+    ],
+    "additives" : [
+        {
+          "id": "ID_activated_charcoal",
+          "name" : {
+              "ru" : "Активированный уголь",
+              "en" : "Activated charcoal"
+          }
+        }
+    ]
+}
+

@@ -6,19 +6,35 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+struct Repository
+{
+    QMap<QString, LipidProfile> lipids;
+    QMap<QString, AcidProfile> acids;
+    QMap<QString, AdditiveProfile> additives;
+};
+
 class IRepository
 {
 public:
     virtual ~IRepository() = default;
-    virtual QMap<QString, LipidProfile> load() = 0;
+    virtual const IRepository& load() = 0;
+
+    inline const Repository& repository() const { return _repository; }
+
+protected:
+    Repository _repository;
 };
 
 class IJsonRepository : public IRepository {
 public:
     IJsonRepository(QString source);
-    virtual QMap<QString, LipidProfile> load() override;
+    virtual const IRepository& load() override;
+
 private:
-    LipidProfile processObject(const QJsonValue& val);
+    LipidProfile toLipid(const QJsonValue& val);
+    AcidProfile toAcid(const QJsonValue& val);
+    AdditiveProfile toAdditive(const QJsonValue& val);
+
     QString _source;
 };
 

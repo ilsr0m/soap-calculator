@@ -4,7 +4,11 @@ SoapCore::SoapCore(IRepository *repository, QObject* parent)
     : QObject(parent)
 {
     if(repository) {
-        _lipidProfiles = repository->load();
+        auto repo = repository->load().repository();
+
+        _lipidProfiles = repo.lipids;
+        _acidProfiles = repo.acids;
+        _additiveProfiles = repo.additives;
     }
 }
 
@@ -47,4 +51,14 @@ void SoapCore::computeLye()
     }
     _output.masses.NaOH = NaOHMass * NaOHPercent * superfat;
     _output.masses.KOH = KOHMass * KOHPercent * superfat;
+}
+
+void SoapCore::computeAcids()
+{
+
+}
+
+void SoapCore::computeAdditives()
+{
+
 }
