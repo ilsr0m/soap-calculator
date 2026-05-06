@@ -1,0 +1,66 @@
+[
+    {
+        "id" : "olive_oil",
+        "name" : {
+            "ru" : "Оливковое масло",
+            "en" : "Olive Oil"
+        },
+        "sap" : {
+            "NaOH" : 0.134, 
+            "KOH" : 0.188
+        },
+        "iodine" : {
+                "min" : 75,
+                "max" : 94,
+                "avg" : 85
+        }
+    },
+    {
+        "id" : "shea_butter",
+        "name" : {
+            "ru" : "Масло ши",
+            "en" : "Shea butter"
+        },
+        "sap" : {
+            "NaOH" : 0.128, 
+            "KOH" : 0.18
+        },
+        "iodine" : {
+                "min" : 50,
+                "max" : 70,
+                "avg" : 60
+        }
+    },
+    {
+        "id" : "stearic_acid",
+        "name" : {
+            "ru" : "Стеариновая кислота",
+            "en" : "Stearic acid"
+        },
+        "sap" : {
+            "NaOH" : 0.15, 
+            "KOH" : 0.211
+        },
+        "iodine" : {
+                "min" : 0,
+                "max" : 0,
+                "avg" : 0
+        }
+    },
+    {
+        "id" : "lard",
+        "name" : {
+            "ru" : "Свиной жир",
+            "en" : "Lard"
+        },
+        "sap" : {
+            "NaOH" : 0.138,
+            "KOH" : 0.193
+        },
+        "iodine" : {
+                "min" : 50,
+                "max" : 70,
+                "avg" : 60
+        }
+    }    
+]

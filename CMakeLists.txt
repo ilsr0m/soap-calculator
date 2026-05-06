@@ -1,0 +1,91 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(soap-calculator VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(APPLICATION_NAME soap-calculator)
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+
+qt_standard_project_setup(REQUIRES 6.5)
+
+set(CORE_SOURCES
+    src/core/soap_core.cpp
+    src/core/soap_core.h
+    src/core/input_builder.cpp
+    src/core/input_builder.h
+)
+
+set(INTERFACE_SOURCES
+    src/interfaces/irepository.cpp
+    src/interfaces/irepository.h
+)
+
+set(SERVICE_SOURCES
+    src/services/json-service/json_loader.cpp
+    src/services/json-service/json_loader.h
+)
+
+set(INCLUDES
+    include/soap_params.h
+)
+
+set(DATA_FILES
+    data/lipids.json
+)
+
+qt_add_executable(${APPLICATION_NAME}
+    src/app/main.cpp
+    ${INCLUDES}
+    ${CORE_SOURCES}
+    ${SERVICE_SOURCES}
+    ${INTERFACE_SOURCES}
+    ${DATA_FILES}
+)
+
+target_include_directories(${APPLICATION_NAME}
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/services/json-service
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
+    src/app/main.cpp
+    ${INCLUDES}
+    ${CORE_SOURCES}
+    ${INTERFACE_SOURCES}
+    ${SERVICE_SOURCES}
+    ${DATA_FILES}
+)
+
+qt_add_qml_module(${APPLICATION_NAME}
+    URI ${APPLICATION_NAME}
+    VERSION 1.0
+    QML_FILES
+        qml/Main.qml
+)
+
+# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
+# If you are developing for iOS or macOS you should consider setting an
+# explicit, fixed bundle identifier manually though.
+set_target_properties(${APPLICATION_NAME} PROPERTIES
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
+target_link_libraries(${APPLICATION_NAME}
+    PRIVATE Qt6::Quick
+)
+
+include(GNUInstallDirs)
+install(TARGETS ${APPLICATION_NAME}
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
