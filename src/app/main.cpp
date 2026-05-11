@@ -4,19 +4,21 @@
 #include <QQmlContext>
 #include <qqml.h>
 
-#include "soap_core.h"
+// #include "soap_core.h"
 #include "irepository.h"
+#include "database.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
     QString src = "F:\\Projects\\QT\\soap-calculator\\data\\lipids.json";
-    IJsonRepository repository(src);
-    SoapCore soapCore(&repository);
+    Database database(new IJsonRepository(src));
+
+    // SoapCore soapCore(&repository);
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("soapCore", &soapCore);
+    // engine.rootContext()->setContextProperty("soapCore", &soapCore);
 
     QObject::connect(
         &engine,

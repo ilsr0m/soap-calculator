@@ -6,7 +6,7 @@ IJsonRepository::IJsonRepository(QString source) : IRepository()
     _source = std::move(source);
 }
 
-IRepository& IJsonRepository::load()
+void IJsonRepository::load()
 {
     QJsonDocument doc = JsonLoader().load(_source).document();
 
@@ -29,7 +29,7 @@ IRepository& IJsonRepository::load()
         }
     }
 
-    return *this;
+    // return *this;
 }
 
 LipidProfile IJsonRepository::toLipid(const QJsonValue& val)

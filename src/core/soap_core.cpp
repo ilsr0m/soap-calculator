@@ -1,64 +1,61 @@
 #include "soap_core.h"
 
-SoapCore::SoapCore(IRepository *repository, QObject* parent)
-    : QObject(parent)
+const RecipeOutput SoapCore::calculate(const RecipeInput &input)
 {
-    if(repository) {
-        auto repo = repository->load().repository();
+    RecipeOutput output;
 
-        _lipidProfiles = repo.lipids;
-        _acidProfiles = repo.acids;
-        _additiveProfiles = repo.additives;
+    // Расчет массы воды
+    // Сколько-то там процентов от общей массы липидов
+    output.baseMasses.water = input.baseLipidMass * (input.basePercents.water / 100.00);
+
+    // Расчет массы липидов
+    for(const LipidInput& lipidIn : input.lipids) {
+        LipidOutput lipidOut;
+        lipidOut.profile = lipidIn.profile;
+        // Расчет массы каждого липида
+        lipidOut.mass = input.baseLipidMass * (lipidIn.percent / 100.00);
+        output.lipids.append(lipidOut);
     }
-}
 
-void SoapCore::compute()
-{
-    computeLipids();
-    computeWater();
-    computeLye();
-}
-
-void SoapCore::computeLipids()
-{
-    for(const ComponentInput& l : _input.lipids) {
-        ComponentOutput out;
-        out.id = l.id;
-        out.mass = _input.totalLipidMass * (l.percent / 100.00);
-        _output.lipids.append(out);
+    // Расчет массы кислот
+    for(const AcidInput& acidIn : input.acids) {
+        AcidOutput acidOut;
+        acidOut.profile = acidIn.profile;
+        // Расчет массы каждого липида
+        acidOut.mass = input.baseLipidMass * (acidIn.percent / 100.00);
+        output.acids.append(acidOut);
     }
-}
 
-void SoapCore::computeWater()
-{
-    _output.masses.water = _input.totalLipidMass * (_input.percents.water / 100.00);
-}
+    // Расчет массы щелочей
+    const qreal superfatFactor = 1 - (input.basePercents.superfat / 100.0);
+    qreal NaOHMassForLipids = 0;
+    qreal NaOHPercent = input.basePercents.NaOH / 100.0;
+    qreal KOHMassForLipids = 0;
+    qreal KOHPercent = input.basePercents.KOH / 100.0;
 
-void SoapCore::computeLye()
-{
-    qreal superfat = 1 - (_input.percents.superfat / 100.0);
-
-    qreal NaOHMass = 0;
-    qreal NaOHPercent = _input.percents.NaOH / 100.0;
-
-    qreal KOHMass = 0;
-    qreal KOHPercent = _input.percents.KOH / 100.0;
-
-    for(const ComponentOutput& l : _output.lipids){
-        Sap sap = getSap(l.id);
-        NaOHMass += sap.NaOH * l.mass;
-        KOHMass += sap.KOH * l.mass;
+    for(const LipidOutput& lipidOut : output.lipids){
+        NaOHMassForLipids += lipidOut.profile.sap.NaOH * lipidOut.mass;
+        KOHMassForLipids  += lipidOut.profile.sap.KOH  * lipidOut.mass;
     }
-    _output.masses.NaOH = NaOHMass * NaOHPercent * superfat;
-    _output.masses.KOH = KOHMass * KOHPercent * superfat;
+
+    output.baseMasses.NaOH = NaOHMassForLipids * NaOHPercent * superfatFactor;
+    output.baseMasses.KOH  = KOHMassForLipids  * KOHPercent  * superfatFactor;
+
+    // необходимо учесть коэффициенты нейтрализации
+    for(const AcidOutput& acidOut : output.acids) {
+        output.baseMasses.NaOH += acidOut.profile.neutralization.NaOH * acidOut.mass;
+        output.baseMasses.KOH  += acidOut.profile.neutralization.KOH  * acidOut.mass;
+    }
+
+    // Расчет массы дополнительных игридиентов
+    for(const AdditiveInput& additiveIn : input.additives) {
+        AdditiveOutput acidOut;
+        acidOut.profile = additiveIn.profile;
+        // Расчет массы каждого липида
+        acidOut.mass = input.baseLipidMass * (additiveIn.percent / 100.00);
+        output.additives.append(acidOut);
+    }
+
+    return output;
 }
 
-void SoapCore::computeAcids()
-{
-
-}
-
-void SoapCore::computeAdditives()
-{
-
-}

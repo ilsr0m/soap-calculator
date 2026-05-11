@@ -25,6 +25,8 @@ set(INTERFACE_SOURCES
 set(SERVICE_SOURCES
     src/services/json-service/json_loader.cpp
     src/services/json-service/json_loader.h
+    src/services/database-service/database.cpp
+    src/services/database-service/database.h
 )
 
 set(INCLUDES
@@ -48,6 +50,7 @@ target_include_directories(${APPLICATION_NAME}
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/src/services/json-service
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/services/database-service
         ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
 )
@@ -67,6 +70,9 @@ qt_add_qml_module(${APPLICATION_NAME}
     VERSION 1.0
     QML_FILES
         qml/Main.qml
+        qml/BaseInput.qml
+        qml/BaseButton.qml
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

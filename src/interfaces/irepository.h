@@ -6,7 +6,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-struct Repository
+struct RepositoryEntities
 {
     QMap<QString, LipidProfile> lipids;
     QMap<QString, AcidProfile> acids;
@@ -17,18 +17,18 @@ class IRepository
 {
 public:
     virtual ~IRepository() = default;
-    virtual const IRepository& load() = 0;
+    virtual void load() = 0;
 
-    inline const Repository& repository() const { return _repository; }
+    inline const RepositoryEntities& repository() const { return _repository; }
 
 protected:
-    Repository _repository;
+    RepositoryEntities _repository;
 };
 
 class IJsonRepository : public IRepository {
 public:
     IJsonRepository(QString source);
-    virtual const IRepository& load() override;
+    virtual void load() override;
 
 private:
     LipidProfile toLipid(const QJsonValue& val);
