@@ -47,7 +47,7 @@ Rectangle {
         Rectangle {
             id: searchArea
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.08
+            Layout.preferredHeight: parent.height * 0.12
             color: "salmon"
 
             RowLayout {
@@ -62,11 +62,12 @@ Rectangle {
             id: listArea
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: theme.background
+            color: theme.panel
 
             ListView {
                 anchors.fill: parent
                 model: root.model
+
             }
         }
 

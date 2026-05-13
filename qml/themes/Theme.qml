@@ -2,23 +2,27 @@
 import QtQuick
 
 QtObject {
-    // Header / sections
+    /* --- Header / Sections --- */
     property color header: "#5d5c61"
     property color headerText: "white"
 
-    // Buttons
-    property color button      : "#7395ae"
-    property color buttonText  : "white"
-    property color buttonBorder: "#7395ae"
+    /* --- Search --- */
 
-    property color buttonHover      : "#5d5c61"
-    property color buttonTextHover  : "white"
-    property color buttonBorderHover: "#5d5c61"
+    /* --- View --- */
 
-    property color buttonPressed      : "#d1cfc9"
-    property color buttonTextPressed  : "#5d5c61"
-    property color buttonBorderPressed: "#5d5c61"
-
+    /* --- Buttons --- */
+    // Base
+    property color button              : "#7395ae"
+    property color buttonText          : "white"
+    property color buttonBorder        : "#7395ae"
+    // Hover
+    property color buttonHover         : "#5d5c61"
+    property color buttonTextHover     : "white"
+    property color buttonBorderHover   : "#5d5c61"
+    // Pressed
+    property color buttonPressed       : "#d1cfc9"
+    property color buttonTextPressed   : "#5d5c61"
+    property color buttonBorderPressed : "#5d5c61"
 
     // Base
     property color background: "#d1cfc9"
