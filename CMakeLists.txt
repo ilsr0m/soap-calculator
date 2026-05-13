@@ -65,14 +65,23 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     ${DATA_FILES}
 )
 
+set(BASE_COMPONENTS
+    qml/components/base/BaseButton.qml
+    qml/components/base/BaseInput.qml
+)
+
+set(PANELS_COMPONENTS
+    qml/components/panels/IngredientPanel.qml
+)
+
 qt_add_qml_module(${APPLICATION_NAME}
     URI ${APPLICATION_NAME}
     VERSION 1.0
     QML_FILES
         qml/Main.qml
-        qml/BaseInput.qml
-        qml/BaseButton.qml
-
+        ${BASE_COMPONENTS}
+        ${PANELS_COMPONENTS}
+        qml/themes/Theme.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

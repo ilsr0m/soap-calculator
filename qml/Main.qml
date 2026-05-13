@@ -1,47 +1,79 @@
 import QtQuick
+import QtQuick.Layouts
+import "components/panels"
+import "themes"
 
 Window {
-    width: 640
-    height: 480
+    id: mainRoot
+
+    Theme { id: theme }
+
+    width: 1100
+    height: 800
     visible: true
-    color: "#cabbbb"
-    title: qsTr("Soap Calculator")
-    BaseInput{ x: 162;y: 105}
-    BaseInput{ x: 162;y: 59}
-    BaseInput{ x: 162;y: 13}
 
-    Text {
-        id: _text
-        x: 47
-        y: 21
-        text: qsTr("Общая масса")
-        font.pixelSize: 18
-    }
+    minimumWidth: 1100
+    minimumHeight: 800
 
-    Text {
-        id: _text1
-        x: 47
-        y: 67
-        text: qsTr("Вода")
-        font.pixelSize: 18
-    }
+    title: qsTr("SOAP CALCULATOR")
 
-    Text {
-        id: _text2
-        x: 47
-        y: 113
-        text: qsTr("Пережир")
-        font.pixelSize: 18
-    }
+    property int gap: 6
 
-    BaseButton {
-        x: 47;
-        y: 159;
-        width: 315;
-        height: 44;
-        text: "Передать в InputBuilder"
-        onClicked: {
+    RowLayout
+    {
+        anchors.fill: parent
+        anchors.margins: mainRoot.gap
+        spacing: mainRoot.gap
 
+        // Левая колонка
+        ColumnLayout {
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.28
+            Layout.minimumWidth: 220
+            Layout.maximumWidth: 420
+
+            IngredientPanel {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                title: qsTr("CHOOSE LIPIDS")
+                model: lipidsModel
+            }
+
+            IngredientPanel {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                title: qsTr("CHOOSE ACIDS")
+                model: acidsModel
+            }
+
+            IngredientPanel {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                title: qsTr("CHOOSE ADDITIVES")
+                model: additivesModel
+            }
         }
+
+        // Центр
+        Rectangle {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width * 0.36
+            color: theme.panel
+        }
+
+        // Правая колонка
+        Rectangle {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width * 0.36
+            color: theme.panel
+        }
+
     }
+
+
+
+
+
 }
