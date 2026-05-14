@@ -1,28 +1,35 @@
-// pragma Singleton
+pragma Singleton
 import QtQuick
 
 QtObject {
     /* --- Header / Sections --- */
-    property color header: "#5d5c61"
-    property color headerText: "white"
+    readonly property color header: "#5d5c61"
+    readonly property color headerText: "white"
 
     /* --- Search --- */
+    readonly property string seachIcon: "qrc:/resources/icons/search.svg"
 
     /* --- View --- */
 
     /* --- Buttons --- */
     // Base
-    property color button              : "#7395ae"
-    property color buttonText          : "white"
-    property color buttonBorder        : "#7395ae"
+
+
+    readonly property color button              : "#7395ae"
+    readonly property color buttonText          : "white"
+    readonly property color buttonBorder        : "#7395ae"
+
+
+
     // Hover
-    property color buttonHover         : "#5d5c61"
-    property color buttonTextHover     : "white"
-    property color buttonBorderHover   : "#5d5c61"
+    readonly property color buttonHover         : "#5d5c61"
+    readonly property color buttonTextHover     : "white"
+    readonly property color buttonBorderHover   : "#5d5c61"
     // Pressed
-    property color buttonPressed       : "#d1cfc9"
-    property color buttonTextPressed   : "#5d5c61"
-    property color buttonBorderPressed : "#5d5c61"
+    readonly property color buttonPressed       : "#d1cfc9"
+    readonly property color buttonTextPressed   : "#5d5c61"
+    readonly property color buttonBorderPressed : "#5d5c61"
+
 
     // Base
     property color background: "#d1cfc9"

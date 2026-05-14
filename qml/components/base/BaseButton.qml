@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 
-import "../../themes"
+// import "../../themes"
+import SoapCalculator
 
 Rectangle {
     id: root
@@ -9,24 +10,24 @@ Rectangle {
     radius: 3
     border.width: 3
 
-    Theme { id: theme }
+    // Theme { id: theme }
 
     // colors
     color: mouseArea.pressed
-        ? theme.buttonPressed
+        ? Theme.buttonPressed
         : mouseArea.containsMouse
-            ? theme.buttonHover
-            : theme.button
+            ? Theme.buttonHover
+            : Theme.button
     border.color: mouseArea.pressed
-        ? theme.buttonBorderPressed
+        ? Theme.buttonBorderPressed
         : mouseArea.containsMouse
-            ? theme.buttonBorderHover
-            : theme.buttonBorder
+            ? Theme.buttonBorderHover
+            : Theme.buttonBorder
     property color textColor: mouseArea.pressed
-        ? theme.buttonTextPressed
+        ? Theme.buttonTextPressed
         : mouseArea.containsMouse
-            ? theme.buttonTextHover
-            : theme.buttonText
+            ? Theme.buttonTextHover
+            : Theme.buttonText
 
     property alias text: buttonText.text
     signal clicked
@@ -51,4 +52,5 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         onClicked: root.clicked()
     }
+
 }

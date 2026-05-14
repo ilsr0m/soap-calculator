@@ -4,7 +4,7 @@ project(soap-calculator VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(APPLICATION_NAME soap-calculator)
+set(APPLICATION_NAME SoapCalculator)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
@@ -33,8 +33,9 @@ set(INCLUDES
     include/soap_params.h
 )
 
-set(DATA_FILES
+set(OTHER_FILES
     data/repository.json
+    resources/resources.qrc
 )
 
 qt_add_executable(${APPLICATION_NAME}
@@ -43,7 +44,13 @@ qt_add_executable(${APPLICATION_NAME}
     ${CORE_SOURCES}
     ${SERVICE_SOURCES}
     ${INTERFACE_SOURCES}
-    ${DATA_FILES}
+    ${OTHER_FILES}
+)
+
+qt_add_resources(${APPLICATION_NAME}
+    PREFIX "/"
+        FILES
+            resources/icons/search.svg
 )
 
 target_include_directories(${APPLICATION_NAME}
@@ -67,23 +74,26 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
 
 set(BASE_COMPONENTS
     qml/components/base/BaseButton.qml
-    qml/components/base/BaseInput.qml
 )
 
 set(PANELS_COMPONENTS
     qml/components/panels/IngredientPanel.qml
 )
 
+set_source_files_properties(qml/themes/Theme.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(${APPLICATION_NAME}
-    URI ${APPLICATION_NAME}
+    URI SoapCalculator
     VERSION 1.0
     QML_FILES
         qml/Main.qml
         ${BASE_COMPONENTS}
         ${PANELS_COMPONENTS}
         qml/themes/Theme.qml
-    RESOURCES
-        resources/resources.qrc
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

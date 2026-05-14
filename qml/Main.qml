@@ -6,7 +6,7 @@ import "themes"
 Window {
     id: mainRoot
 
-    Theme { id: theme }
+    // Theme { id: theme }
 
     width: 1100
     height: 800
@@ -36,21 +36,21 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE LIPIDS")
-                model: lipidsModel
+                // model: lipidsModel
             }
 
             IngredientPanel {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE ACIDS")
-                model: acidsModel
+                // model: acidsModel
             }
 
             IngredientPanel {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE ADDITIVES")
-                model: additivesModel
+                // model: additivesModel
             }
         }
 
@@ -59,7 +59,7 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: parent.width * 0.36
-            color: theme.panel
+            color: Theme.panel
         }
 
         // Правая колонка
@@ -67,7 +67,7 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: parent.width * 0.36
-            color: theme.panel
+            color: Theme.panel
         }
 
     }

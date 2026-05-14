@@ -1,13 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../themes"
-import "../base"
+
+import SoapCalculator
+
+// import "../../themes"
+// import "../base"
 
 Rectangle {
     id: root
-    Theme { id: theme }
+    color: Theme.panel
 
-    color: theme.panel
     property int gap: 6
 
     property string title: qsTr("TITLE")
@@ -16,7 +18,7 @@ Rectangle {
     property string addButtonText : qsTr("ADD TO RECIPE")
     property string infoButtonText: qsTr("INFO")
 
-    property var model: dummyModel
+    property var model
 
     width : parent.width  * 0.25
     height: parent.height * 0.25
@@ -32,12 +34,12 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height * 0.08
 
-            color: theme.header
+            color: Theme.header
 
             Text {
                 anchors.centerIn: parent
                 text: root.title
-                color: theme.headerText
+                color: Theme.headerText
                 font.pixelSize: 16
                 font.bold: true
             }
@@ -48,12 +50,53 @@ Rectangle {
             id: searchArea
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height * 0.12
-            color: "salmon"
+            // color: "salmon"
 
-            RowLayout {
+            Row {
+                id: searchRow
+
+                anchors.fill: parent
+                anchors.leftMargin: parent.width * 0.03
+                anchors.rightMargin: parent.width * 0.03
+                spacing: parent.width * 0.02
+
+                Image {
+                    id: searchIcon
+                    source: Theme.seachIcon
+
+                    height: parent.height * 0.5
+                    width: height
+                    fillMode: Image.PreserveAspectFit
+
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
                 TextInput {
                     id: searchInput
+                    width: searchRow.width - searchIcon.width - searchRow.spacing
+                                   - searchRow.anchors.leftMargin - searchRow.anchors.rightMargin
+                    height: parent.height
+
+                    verticalAlignment: TextInput.AlignVCenter
+                    font.pixelSize: parent.height * 0.5
+
+                    color: "black"
+                    clip: true
+
+                    Text {
+                        anchors.fill: parent
+                        verticalAlignment: Text.AlignVCenter
+
+                        text: "SEARCH..."
+                        color: "#999999"
+                        font.pixelSize: searchInput.font.pixelSize
+
+                        visible: searchInput.text.length === 0
+                    }
+
+                    HoverHandler { cursorShape: Qt.IBeamCursor }
                 }
+
             }
         }
 
@@ -62,7 +105,7 @@ Rectangle {
             id: listArea
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: theme.panel
+            color: Theme.panel
 
             ListView {
                 anchors.fill: parent
@@ -76,7 +119,7 @@ Rectangle {
             id: actionArea
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height * 0.12
-            color: theme.panel
+            color: Theme.panel
 
             property double buttonWidthScale: 0.48
             property double buttonHeightScale: 0.9
