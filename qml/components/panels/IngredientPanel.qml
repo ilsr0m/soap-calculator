@@ -1,10 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
 import SoapCalculator
-
-// import "../../themes"
-// import "../base"
 
 Rectangle {
     id: root
@@ -30,9 +28,11 @@ Rectangle {
 
         // Title
         Rectangle {
+            radius: Theme.radius
+
             id: titleArea
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.08
+            Layout.preferredHeight: parent.height * 0.1
 
             color: Theme.header
 
@@ -40,16 +40,19 @@ Rectangle {
                 anchors.centerIn: parent
                 text: root.title
                 color: Theme.headerText
-                font.pixelSize: 16
+                // font.pixelSize: 16
+                font.pixelSize: parent.height * 0.7
                 font.bold: true
             }
         }
 
         // Search area
         Rectangle {
+            radius: Theme.radius
+
             id: searchArea
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.12
+            Layout.preferredHeight: parent.height * 0.10
             // color: "salmon"
 
             Row {
@@ -83,6 +86,11 @@ Rectangle {
                     color: "black"
                     clip: true
 
+
+
+                    selectionColor: Theme.searchSelectionColor
+                    selectedTextColor: Theme.searchSelectionTextColor
+
                     Text {
                         anchors.fill: parent
                         verticalAlignment: Text.AlignVCenter
@@ -102,15 +110,78 @@ Rectangle {
 
         // ListView of ingredients
         Rectangle {
+            // radius: Theme.radius
             id: listArea
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: Theme.panel
+            color: Theme.listView
 
             ListView {
-                anchors.fill: parent
+                id: listView
+                currentIndex: -1
+
+                anchors.fill: listArea
                 model: root.model
 
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
+                flickableDirection: Flickable.VerticalFlick
+                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
+
+                // spacing: -3
+
+                delegate: Rectangle {
+
+                    id: viewDelegate
+
+                    width: ListView.view.width
+                    height: listArea.height * 0.2
+
+                    function resolveColor(normal, hover, selected) {
+                        if (ListView.isCurrentItem)
+                            return selected
+
+                        if(mouseArea.pressed)
+                            return selected
+                        if(mouseArea.containsMouse)
+                            return hover
+                        return normal
+                    }
+
+                    Text {
+                        color: viewDelegate.resolveColor(Theme.listItemText,
+                                                         Theme.listItemTextHover,
+                                                         Theme.listItemTextPressed)
+
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 10
+                        text: nameEn
+
+                        font.pixelSize: listArea.height * 0.1
+                        font.bold: true
+                    }
+
+                    color: viewDelegate.resolveColor(Theme.listItem,
+                                                     Theme.listItemHover,
+                                                     Theme.listItemPressed)
+                    signal clicked
+                    Behavior on color { ColorAnimation { duration: 120 } }
+                    MouseArea {
+                        id: mouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onClicked: {
+                            if(mouse.button === Qt.LeftButton)
+                                listView.currentIndex = index
+                            if(mouse.button === Qt.RightButton)
+                                listView.currentIndex = -1
+                        }
+                    }
+                }
             }
         }
 
@@ -130,12 +201,15 @@ Rectangle {
                 spacing: 10
                 BaseButton {
                     id: infoButton
+                    buttonType: BaseButton.Neutral
+
                     text: root.infoButtonText
                     width : actionArea.width  * actionArea.buttonWidthScale
                     height: actionArea.height * actionArea.buttonHeightScale
                 }
                 BaseButton {
                     id: addButton
+                    buttonType: BaseButton.Positive
                     text: root.addButtonText
                     width : actionArea.width  * actionArea.buttonWidthScale
                     height: actionArea.height * actionArea.buttonHeightScale

@@ -28,6 +28,14 @@ set(SERVICE_SOURCES
     src/services/database-service/database.cpp
     src/services/database-service/database.h
 )
+set(MODELS
+    src/models/lipid_model.cpp
+    src/models/lipid_model.h
+    src/models/acid_model.cpp
+    src/models/acid_model.h
+    src/models/additive_model.cpp
+    src/models/additive_model.h
+)
 
 set(INCLUDES
     include/soap_params.h
@@ -43,6 +51,7 @@ qt_add_executable(${APPLICATION_NAME}
     ${INCLUDES}
     ${CORE_SOURCES}
     ${SERVICE_SOURCES}
+    ${MODELS}
     ${INTERFACE_SOURCES}
     ${OTHER_FILES}
 )
@@ -60,6 +69,7 @@ target_include_directories(${APPLICATION_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/services/database-service
         ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/models
 )
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -68,8 +78,10 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     ${INCLUDES}
     ${CORE_SOURCES}
     ${INTERFACE_SOURCES}
+    ${MODELS}
     ${SERVICE_SOURCES}
     ${DATA_FILES}
+    ${OTHER_FILES}
 )
 
 set(BASE_COMPONENTS
@@ -93,6 +105,7 @@ qt_add_qml_module(${APPLICATION_NAME}
         ${BASE_COMPONENTS}
         ${PANELS_COMPONENTS}
         qml/themes/Theme.qml
+    SOURCES
 
 )
 

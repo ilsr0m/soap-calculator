@@ -9,17 +9,6 @@ Database::Database(IRepository *repository) {
     }
 }
 
-const QMap<QString, LipidProfile>& Database::lipids() const
-{
-    return _lipidProfiles;
-}
-
-const QMap<QString, AcidProfile>& Database::acids() const
-{
-    return _acidProfiles;
-}
-
-const QMap<QString, AdditiveProfile>& Database::additives() const
-{
-    return _additiveProfiles;
-}
+const QLipidMap&    Database::lipids()    const { return _lipidProfiles;    }
+const QAcidMap&     Database::acids()     const { return _acidProfiles;     }
+const QAdditiveMap& Database::additives() const { return _additiveProfiles; }

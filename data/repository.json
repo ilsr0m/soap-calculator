@@ -92,6 +92,28 @@
               "NaOH": 0.355,
               "KOH": 0.498
           }
+        },
+        {
+                "id": "ID_citric_acid",
+                "name": {
+                    "ru": "Лимонная кислота",
+                    "en": "Citric acid"
+                },
+                "neutralization": {
+                    "NaOH": 0.624,
+                    "KOH": 0.875
+                }
+        },
+        {
+                "id": "ID_succinic_acid",
+                "name": {
+                    "ru": "Янтарная кислота",
+                    "en": "Succinic acid"
+                },
+                "neutralization": {
+                    "NaOH": 0.476,
+                    "KOH": 0.667
+                }
         }
     ],
     "additives" : [
@@ -101,7 +123,70 @@
               "ru" : "Активированный уголь",
               "en" : "Activated charcoal"
           }
-        }
+        },
+        {
+            "id": "ID_white_clay",
+            "name": {
+                "ru": "Белая глина",
+                "en": "White clay"
+            }
+        },
+        {
+                "id": "ID_red_clay",
+                "name": {
+                    "ru": "Красная глина",
+                    "en": "Red clay"
+                }
+            },
+            {
+                "id": "ID_blue_clay",
+                "name": {
+                    "ru": "Голубая глина",
+                    "en": "Blue clay"
+                }
+            },
+            {
+                "id": "ID_green_clay",
+                "name": {
+                    "ru": "Зелёная глина",
+                    "en": "Green clay"
+                }
+            },
+            {
+                "id": "ID_pink_clay",
+                "name": {
+                    "ru": "Розовая глина",
+                    "en": "Pink clay"
+                }
+            },
+            {
+                "id": "ID_sulfur",
+                "name": {
+                    "ru": "Сера",
+                    "en": "Sulfur"
+                }
+            },
+            {
+                "id": "ID_birch_tar",
+                "name": {
+                    "ru": "Берёзовый дёготь",
+                    "en": "Birch tar"
+                }
+            },
+            {
+                "id": "ID_oatmeal",
+                "name": {
+                    "ru": "Овсянка",
+                    "en": "Oatmeal"
+                }
+            },
+            {
+                "id": "ID_vitamin_e",
+                "name": {
+                    "ru": "Витамин E",
+                    "en": "Vitamin E"
+                }
+            }
     ]
 }
 

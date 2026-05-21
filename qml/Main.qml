@@ -33,29 +33,37 @@ Window {
             Layout.maximumWidth: 420
 
             IngredientPanel {
+                radius: Theme.radius
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE LIPIDS")
-                // model: lipidsModel
+                model: lipidModel
             }
 
             IngredientPanel {
+                radius: Theme.radius
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE ACIDS")
-                // model: acidsModel
+                model: acidModel
             }
 
             IngredientPanel {
+                radius: Theme.radius
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE ADDITIVES")
-                // model: additivesModel
+                model: additiveModel
             }
         }
 
         // Центр
         Rectangle {
+            radius: Theme.radius
+
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: parent.width * 0.36
@@ -64,6 +72,8 @@ Window {
 
         // Правая колонка
         Rectangle {
+            radius: Theme.radius
+
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.preferredWidth: parent.width * 0.36

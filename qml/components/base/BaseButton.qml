@@ -1,37 +1,58 @@
 import QtQuick
 import QtQuick.Controls
 
-// import "../../themes"
 import SoapCalculator
 
 Rectangle {
     id: root
 
-    radius: 3
+    radius: Theme.radius
     border.width: 3
 
     // Theme { id: theme }
 
     // colors
-    color: mouseArea.pressed
-        ? Theme.buttonPressed
-        : mouseArea.containsMouse
-            ? Theme.buttonHover
-            : Theme.button
-    border.color: mouseArea.pressed
-        ? Theme.buttonBorderPressed
-        : mouseArea.containsMouse
-            ? Theme.buttonBorderHover
-            : Theme.buttonBorder
-    property color textColor: mouseArea.pressed
-        ? Theme.buttonTextPressed
-        : mouseArea.containsMouse
-            ? Theme.buttonTextHover
-            : Theme.buttonText
+
+    enum ButtonType { Neutral, Positive, Negative }
+    property int buttonType: BaseButton.Neutral
+
+    function resolveColor(normal, hover, pressed) {
+        if(mouseArea.pressed)
+            return pressed
+        if(mouseArea.containsMouse)
+            return hover
+        return normal
+    }
+
+    function palette() {
+        switch(buttonType) {
+            case BaseButton.Positive:
+                return {
+                    background: resolveColor(Theme.buttonPositive      , Theme.buttonHoverPositive      , Theme.buttonPressedPositive      ),
+                    border    : resolveColor(Theme.buttonBorderPositive, Theme.buttonBorderHoverPositive, Theme.buttonBorderPressedPositive),
+                    text      : resolveColor(Theme.buttonTextPositive  , Theme.buttonTextHoverPositive  , Theme.buttonTextPressedPositive  )
+                }
+            case BaseButton.Negative:
+                return {
+                    background: resolveColor(Theme.buttonNegative      , Theme.buttonHoverNegative      , Theme.buttonPressedNegative      ),
+                    border    : resolveColor(Theme.buttonBorderNegative, Theme.buttonBorderHoverNegative, Theme.buttonBorderPressedNegative),
+                    text      : resolveColor(Theme.buttonTextNegative  , Theme.buttonTextHoverNegative  , Theme.buttonTextPressedNegative  )
+                }
+            default:
+                return {
+                    background: resolveColor(Theme.button      , Theme.buttonHover      , Theme.buttonPressed      ),
+                    border    : resolveColor(Theme.buttonBorder, Theme.buttonBorderHover, Theme.buttonBorderPressed),
+                    text      : resolveColor(Theme.buttonText  , Theme.buttonTextHover  , Theme.buttonTextPressed  )
+                }
+        }
+    }
+
+    color       : palette().background
+    border.color: palette().border
+    property color textColor: palette().text
 
     property alias text: buttonText.text
     signal clicked
-
     Behavior on color { ColorAnimation { duration: 120 } }
 
     Text {
@@ -40,7 +61,7 @@ Rectangle {
 
         color: root.textColor
 
-        font.pixelSize: 16
+        font.pixelSize: parent.height * 0.5
         font.bold: true
         text: qsTr("Button")
     }

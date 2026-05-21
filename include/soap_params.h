@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QString>
+#include <QMetaType>
 
 // Lipid data
 // Йодовое число
@@ -28,17 +29,23 @@ struct LipidProfile {
     Sap sap;        // сапонификационное число
     Iodine iodine;  // йодовое значение
 };
-
-struct AdditiveProfile {
-    ComponentName name;
-    qreal usagePercent = 0;
-};
+using QLipidMap = QMap<QString, LipidProfile>;
+Q_DECLARE_METATYPE(LipidProfile)
 
 struct AcidProfile {
     ComponentName name;
     Sap neutralization;
     qreal usagePercent = 0;
 };
+using QAcidMap = QMap<QString, AcidProfile>;
+Q_DECLARE_METATYPE(AcidProfile)
+
+struct AdditiveProfile {
+    ComponentName name;
+    qreal usagePercent = 0;
+};
+using QAdditiveMap = QMap<QString, AdditiveProfile>;
+Q_DECLARE_METATYPE(AdditiveProfile)
 
 // ------------------------------- //
 // Input - Входные параметры
