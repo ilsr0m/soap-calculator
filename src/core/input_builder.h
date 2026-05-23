@@ -18,6 +18,11 @@ public:
         return *this;
     }
 
+    inline InputBuilder& withAdditionalSuperfat(const double value) {
+        _input.basePercents.additionalSuperfat = value;
+        return *this;
+    }
+
     inline InputBuilder& withWater(const double value) {
         _input.basePercents.water = value;
         return *this;

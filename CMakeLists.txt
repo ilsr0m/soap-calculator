@@ -60,6 +60,9 @@ qt_add_resources(${APPLICATION_NAME}
     PREFIX "/"
         FILES
             resources/icons/search.svg
+            resources/icons/info.svg
+            resources/icons/edit.svg
+            resources/icons/settings.svg
 )
 
 target_include_directories(${APPLICATION_NAME}
@@ -89,7 +92,12 @@ set(BASE_COMPONENTS
 )
 
 set(PANELS_COMPONENTS
-    qml/components/panels/IngredientPanel.qml
+
+    qml/components/panels/ingredient-panel/ingredient-components/IngredientTitle.qml
+    qml/components/panels/ingredient-panel/ingredient-components/IngredientSearch.qml
+    qml/components/panels/ingredient-panel/ingredient-components/IngredientView.qml
+    qml/components/panels/ingredient-panel/ingredient-components/IngredientButtons.qml
+    qml/components/panels/ingredient-panel/IngredientPanel.qml
 )
 
 set_source_files_properties(qml/themes/Theme.qml

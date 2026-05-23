@@ -2,87 +2,96 @@ pragma Singleton
 import QtQuick
 
 QtObject {
+
+    readonly property QtObject config: QtObject {
+        readonly property color _color_1      : "white"
+        readonly property color _color_2      : "#5d5c61"
+        readonly property color _color_3      : "#7395ae"
+        readonly property color _color_4      : "#d1cfc9"
+        readonly property color _positiveColor: "#6fa36f"
+        readonly property color _negativeColor: "#bf5054"
+    }
+
+
+    readonly property color mainWindow: config._color_2
+
     /* --- Header / Sections --- */
-    readonly property color header: "#5d5c61"
-    readonly property color headerText: "white"
+    readonly property color header    : config._color_2
+    readonly property color headerText: config._color_1
 
     /* --- Search --- */
-    readonly property string seachIcon: "qrc:/resources/icons/search.svg"
-    readonly property color searchSelectionColor: "#7395ae"
-    readonly property color searchSelectionTextColor: "white"
-
-    /* --- View --- */
+    readonly property string searchIconPath: "qrc:/resources/icons/search.svg"
+    readonly property color searchTextInputColor          : config._color_2
+    readonly property color searchTextInputBackgroundColor: config._color_1
+    readonly property color searchTextColor               : "#999999"
+    readonly property color searchSelectionColor          : config._color_3
+    readonly property color searchSelectionTextColor      : config._color_1
+    // search icon
+    readonly property string editIconPath: "qrc:/resources/icons/edit.svg"
+    readonly property color editIcon                 : config._color_2
+    readonly property color editIconHover            : config._color_1
+    readonly property color editIconBackground       : config._color_1
+    readonly property color editIconBackgroundHover  : config._color_2
+    readonly property color editIconBackgroundPressed: config._color_3
 
     /* --- Buttons --- */
     // -> Neutral
     // Base
-    readonly property color button              : "#7395ae"
-    readonly property color buttonText          : "white"
-    readonly property color buttonBorder        : "#7395ae"
+    readonly property color button      : config._color_3
+    readonly property color buttonText  : config._color_1
+    readonly property color buttonBorder: config._color_3
     // Hover
-    readonly property color buttonHover         : "#5d5c61"
-    readonly property color buttonTextHover     : "white"
-    readonly property color buttonBorderHover   : "#5d5c61"
+    readonly property color buttonHover      : config._color_2
+    readonly property color buttonTextHover  : config._color_1
+    readonly property color buttonBorderHover: config._color_2
     // Pressed
-    readonly property color buttonPressed       : "#d1cfc9"
-    readonly property color buttonTextPressed   : "#5d5c61"
-    readonly property color buttonBorderPressed : "#5d5c61"
+    readonly property color buttonPressed      : config._color_4
+    readonly property color buttonTextPressed  : config._color_2
+    readonly property color buttonBorderPressed: config._color_2
     // -> Positive
     // Base
-    readonly property color buttonPositive              : "#6fa36f"
-    readonly property color buttonTextPositive          : "white"
-    readonly property color buttonBorderPositive        : "#6fa36f"
+    readonly property color buttonPositive      : config._positiveColor
+    readonly property color buttonTextPositive  : config._color_1
+    readonly property color buttonBorderPositive: config._positiveColor
     // Hover
-    readonly property color buttonHoverPositive         : "#5d5c61"
-    readonly property color buttonTextHoverPositive     : "white"
-    readonly property color buttonBorderHoverPositive   : "#5d5c61"
+    readonly property color buttonHoverPositive      : config._color_2
+    readonly property color buttonTextHoverPositive  : config._color_1
+    readonly property color buttonBorderHoverPositive: config._color_2
     // Pressed
-    readonly property color buttonPressedPositive       : "#d1cfc9"
-    readonly property color buttonTextPressedPositive   : "#5d5c61"
-    readonly property color buttonBorderPressedPositive : "#5d5c61"
+    readonly property color buttonPressedPositive      : config._color_4
+    readonly property color buttonTextPressedPositive  : config._color_2
+    readonly property color buttonBorderPressedPositive: config._color_2
     // -> Negative
     // Base
-    readonly property color buttonNegative              : "#bf5054"
-    readonly property color buttonTextNegative          : "white"
-    readonly property color buttonBorderNegative        : "#bf5054"
+    readonly property color buttonNegative      : config._negativeColor
+    readonly property color buttonTextNegative  : config._color_1
+    readonly property color buttonBorderNegative: config._negativeColor
     // Hover
-    readonly property color buttonHoverNegative         : "#5d5c61"
-    readonly property color buttonTextHoverNegative     : "white"
-    readonly property color buttonBorderHoverNegative   : "#5d5c61"
+    readonly property color buttonHoverNegative      : config._color_2
+    readonly property color buttonTextHoverNegative  : config._color_1
+    readonly property color buttonBorderHoverNegative: config._color_2
     // Pressed
-    readonly property color buttonPressedNegative       : "#d1cfc9"
-    readonly property color buttonTextPressedNegative   : "#5d5c61"
-    readonly property color buttonBorderPressedNegative : "#5d5c61"
+    readonly property color buttonPressedNegative      : config._color_4
+    readonly property color buttonTextPressedNegative  : config._color_2
+    readonly property color buttonBorderPressedNegative: config._color_2
+
     /* --- Buttons end --- */
 
     // Base
-    readonly property color background: "#d1cfc9"
-    readonly property color panel: "#d1cfc9"
+    readonly property color background: config._color_4
+    readonly property color panel     : config._color_4
 
     // ListView
-    readonly property color listView        : "white"
-    // readonly property color listItem        : "white"
-    // readonly property color listItemBorder  : "white"
-    // readonly property color listItemText    : "#5d5c61"
+    readonly property color listView : config._color_1
+    // delegate of listView
+    readonly property color listItem           : config._color_1
+    readonly property color listItemHover      : config._color_2
+    readonly property color listItemPressed    : config._color_3
+    readonly property color listItemText       : config._color_2
+    readonly property color listItemTextHover  : config._color_1
+    readonly property color listItemTextPressed: config._color_1
 
-    readonly property color listItem          : "white"
-    readonly property color listItemText      : "#5d5c61"
-    readonly property color listItemHover     : "#5d5c61"
-    readonly property color listItemTextHover : "white"
-    readonly property color listItemPressed     : "#7395ae"
-    readonly property color listItemTextPressed : "white"
-    // readonly property color listItemBorder  : "white"
-
-
-
-
-
-    // readonly property color listItemHover   : "#5d5c61"
-    // readonly property color listItemSelected: "#5d5c61"
-
-    // readonly property color listItemHover   : "#5d5c61"
-    // readonly property color listItemSelected: "#5d5c61"
-
-    readonly property int radius: 0
     readonly property int spacing: 8
+
+    readonly property int animationDuration: 100
 }

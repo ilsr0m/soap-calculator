@@ -5,13 +5,7 @@ import SoapCalculator
 
 Rectangle {
     id: root
-
-    radius: Theme.radius
     border.width: 3
-
-    // Theme { id: theme }
-
-    // colors
 
     enum ButtonType { Neutral, Positive, Negative }
     property int buttonType: BaseButton.Neutral

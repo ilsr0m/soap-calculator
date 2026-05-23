@@ -70,6 +70,7 @@ struct PercentParameters {
     qreal NaOH = 100;    // Процент гидроксида натрия
     qreal water = 33;    // Процент воды от общей массы масел
     qreal superfat = 5;  // Пережир
+    qreal additionalSuperfat = 0; // Дополнительный пережир (исп. в холодном способе)
 };
 
 struct RecipeInput {
@@ -103,7 +104,8 @@ struct AcidOutput {
 struct MassParameters {
     qreal water = 0; // Вода в граммах
     qreal NaOH = 0;  // Гидроксид натрия в граммах
-    qreal KOH= 0;    // Гидроксид калия в граммах
+    qreal KOH = 0;    // Гидроксид калия в граммах
+    qreal additonalSuperfat = 0;
 };
 
 struct RecipeOutput {

@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "components/panels"
+import "components/panels/ingredient-panel"
 import "themes"
 
 Window {
@@ -19,6 +19,8 @@ Window {
 
     property int gap: 6
 
+    color: Theme.mainWindow
+
     RowLayout
     {
         anchors.fill: parent
@@ -33,7 +35,9 @@ Window {
             Layout.maximumWidth: 420
 
             IngredientPanel {
-                radius: Theme.radius
+                // radius: Theme.radius
+                width : parent.width  * 0.25
+                height: parent.height * 0.25
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -42,7 +46,9 @@ Window {
             }
 
             IngredientPanel {
-                radius: Theme.radius
+                // radius: Theme.radius
+                width : parent.width  * 0.25
+                height: parent.height * 0.25
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -51,7 +57,9 @@ Window {
             }
 
             IngredientPanel {
-                radius: Theme.radius
+                // radius: Theme.radius
+                width : parent.width  * 0.25
+                height: parent.height * 0.25
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -62,7 +70,7 @@ Window {
 
         // Центр
         Rectangle {
-            radius: Theme.radius
+            // radius: Theme.radius
 
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -72,7 +80,7 @@ Window {
 
         // Правая колонка
         Rectangle {
-            radius: Theme.radius
+            // radius: Theme.radius
 
             Layout.fillHeight: true
             Layout.fillWidth: true
