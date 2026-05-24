@@ -1,4 +1,4 @@
-#include "irepository.h"
+#include "ijson_repository.h"
 #include "json_loader.h"
 
 IJsonRepository::IJsonRepository(QString source) : IRepository()

@@ -21,8 +21,9 @@ set(CORE_SOURCES
 )
 
 set(INTERFACE_SOURCES
-    src/interfaces/irepository.cpp
-    src/interfaces/irepository.h
+    src/interfaces/repository-interface/irepository.h
+    src/interfaces/repository-interface/json-interface/ijson_repository.cpp
+    src/interfaces/repository-interface/json-interface/ijson_repository.h
 )
 
 set(SERVICE_SOURCES
@@ -76,7 +77,8 @@ target_include_directories(${APPLICATION_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/src/services/json-service
         ${CMAKE_CURRENT_SOURCE_DIR}/src/services/database-service
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/repository-interface
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/repository-interface/json-interface
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
         ${CMAKE_CURRENT_SOURCE_DIR}/src/models
         ${CMAKE_CURRENT_SOURCE_DIR}/src/models/acid-model
@@ -102,7 +104,6 @@ set(BASE_COMPONENTS
 )
 
 set(PANELS_COMPONENTS
-
     qml/components/panels/ingredient-panel/ingredient-components/IngredientTitle.qml
     qml/components/panels/ingredient-panel/ingredient-components/IngredientSearch.qml
     qml/components/panels/ingredient-panel/ingredient-components/IngredientView.qml
