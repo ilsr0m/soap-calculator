@@ -67,7 +67,7 @@ Rectangle {
 
                         onTextChanged: {
                             //  TODO: Отображать только соответствующие игредиенты если введенное слово есть в имени
-                            console.log("text changed")
+                            console.log("text changed: " + appSettings.language)
                         }
                     }
                 }

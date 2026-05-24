@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import "components/panels/ingredient-panel"
 import "themes"
+import SoapCalculator 1.0
 
 Window {
     id: mainRoot
@@ -20,6 +21,8 @@ Window {
     property int gap: 6
 
     color: Theme.mainWindow
+
+    Component.onCompleted: { appSettings.language = "ru" }
 
     RowLayout
     {

@@ -14,8 +14,7 @@ public:
 
     enum Roles {
         IdRole = Qt::UserRole + 1,
-        NameEnRole,
-        NameRuRole
+        NameRole
     };
 
     void setModel(const QVariant &data);
@@ -25,9 +24,10 @@ public:
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
+
 private:
-    QAdditiveMap _additives;
-    QStringList _ids;
+    AdditiveContainer _additives;
+    QList<int> _roles = {IdRole, NameRole};
 };
 
 #endif // ACID_MODEL_H

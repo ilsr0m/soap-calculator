@@ -8,14 +8,14 @@ class Database
 public:
     Database(IRepository *repository);
 
-    const QLipidMap&     lipids()    const;
-    const QAcidMap&      acids()     const;
-    const QAdditiveMap&  additives() const;
+    const LipidContainer&     lipids()    const;
+    const AcidContainer&      acids()     const;
+    const AdditiveContainer&  additives() const;
 
 private:
-    QLipidMap    _lipidProfiles;
-    QAcidMap     _acidProfiles;
-    QAdditiveMap _additiveProfiles;
+    LipidContainer    _lipidProfiles;
+    AcidContainer     _acidProfiles;
+    AdditiveContainer _additiveProfiles;
 };
 
 #endif // DATABASE_H

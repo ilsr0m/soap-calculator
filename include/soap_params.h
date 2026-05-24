@@ -21,30 +21,52 @@ struct Sap {
 struct ComponentName {
     QString en;
     QString ru;
+
+    QString value(const QString& lang) const {
+        if (lang == "ru")
+            return ru;
+        if (lang == "en")
+            return en;
+        return en;
+    }
 };
 
 // Профиль каждого липида
 struct LipidProfile {
+    QString id;
+    ComponentName type;
     ComponentName name;
     Sap sap;        // сапонификационное число
     Iodine iodine;  // йодовое значение
+
+    bool operator==(const LipidProfile& other) const { return id == other.id; }
 };
-using QLipidMap = QMap<QString, LipidProfile>;
+using LipidContainer = QVector<LipidProfile>;
+// using QLipidMap = QMap<QString, LipidProfile>;
 Q_DECLARE_METATYPE(LipidProfile)
 
 struct AcidProfile {
+    QString id;
     ComponentName name;
     Sap neutralization;
     qreal usagePercent = 0;
+
+    bool operator==(const AcidProfile& other) const { return id == other.id; }
 };
-using QAcidMap = QMap<QString, AcidProfile>;
+
+using AcidContainer = QVector<AcidProfile>;
+// using QAcidMap = QMap<QString, AcidProfile>;
 Q_DECLARE_METATYPE(AcidProfile)
 
 struct AdditiveProfile {
+    QString id;
     ComponentName name;
     qreal usagePercent = 0;
+
+    bool operator==(const AdditiveProfile& other) const { return id == other.id; }
 };
-using QAdditiveMap = QMap<QString, AdditiveProfile>;
+using AdditiveContainer = QVector<AdditiveProfile>;
+// using QAdditiveMap = QMap<QString, AdditiveProfile>;
 Q_DECLARE_METATYPE(AdditiveProfile)
 
 // ------------------------------- //
@@ -98,7 +120,6 @@ struct AcidOutput {
     AcidProfile profile;
     qreal mass;
 };
-
 
 // ---------------- //
 struct MassParameters {

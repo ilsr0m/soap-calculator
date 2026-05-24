@@ -1,21 +1,21 @@
-#ifndef ACID_MODEL_H
-#define ACID_MODEL_H
+#ifndef LIPID_MODEL_H
+#define LIPID_MODEL_H
 
 #include <QObject>
 #include <QAbstractListModel>
 
 #include "soap_params.h"
 
-class AcidModel : public QAbstractListModel
+class LipidModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit AcidModel(QObject *parent = nullptr);
+    explicit LipidModel(QObject * parent = nullptr);
 
     enum Roles {
         IdRole = Qt::UserRole + 1,
-        NameEnRole,
-        NameRuRole
+        NameRole,
+        TypeRole
     };
 
     void setModel(const QVariant& data);
@@ -27,8 +27,8 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QAcidMap _acids;
-    QStringList _ids;
+    LipidContainer _lipids;
+    QList<int> _roles = {IdRole, NameRole, TypeRole};
 };
 
-#endif // ACID_MODEL_H
+#endif // SOAP_CORE_H

@@ -47,7 +47,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 10
-                text: nameEn
+                text: name
 
                 font.pixelSize: listArea.height * 0.1
                 font.bold: true

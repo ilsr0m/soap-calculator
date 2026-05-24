@@ -18,6 +18,8 @@ Rectangle {
 
     property var model
 
+    property string language: "en"
+
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: root.gap
@@ -39,6 +41,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             model: root.model
+
         }
 
         IngredientButtons {

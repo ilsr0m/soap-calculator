@@ -12,6 +12,8 @@
 #include "acid_model.h"
 #include "additive_model.h"
 
+#include "app_settings.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -21,12 +23,16 @@ int main(int argc, char *argv[])
 
     LipidModel lipidModel = LipidModel();
     lipidModel.setModel(QVariant::fromValue(database.lipids()));
+
     AcidModel acidModel = AcidModel();
     acidModel.setModel(QVariant::fromValue(database.acids()));
+
     AdditiveModel additiveModel = AdditiveModel();
     additiveModel.setModel(QVariant::fromValue(database.additives()));
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("appSettings", &AppSettings::instance());
+
     engine.rootContext()->setContextProperty("lipidModel", &lipidModel);
     engine.rootContext()->setContextProperty("acidModel", &acidModel);
     engine.rootContext()->setContextProperty("additiveModel", &additiveModel);

@@ -15,6 +15,9 @@ set(CORE_SOURCES
     src/core/soap_core.h
     src/core/input_builder.cpp
     src/core/input_builder.h
+
+    src/app/app-settings/app_settings.h
+    src/app/app-settings/app_settings.cpp
 )
 
 set(INTERFACE_SOURCES
@@ -29,16 +32,19 @@ set(SERVICE_SOURCES
     src/services/database-service/database.h
 )
 set(MODELS
-    src/models/lipid_model.cpp
-    src/models/lipid_model.h
-    src/models/acid_model.cpp
-    src/models/acid_model.h
-    src/models/additive_model.cpp
-    src/models/additive_model.h
+    src/models/base_model.cpp
+    src/models/base_model.h
+    src/models/lipid-model/lipid_model.cpp
+    src/models/lipid-model/lipid_model.h
+    src/models/acid-model/acid_model.cpp
+    src/models/acid-model/acid_model.h
+    src/models/additive-model/additive_model.cpp
+    src/models/additive-model/additive_model.h
 )
 
 set(INCLUDES
     include/soap_params.h
+    include/utils.h
 )
 
 set(OTHER_FILES
@@ -73,6 +79,10 @@ target_include_directories(${APPLICATION_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core
         ${CMAKE_CURRENT_SOURCE_DIR}/src/models
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/models/acid-model
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/models/additive-model
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/models/lipid-model
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/app/app-settings
 )
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -112,9 +122,7 @@ qt_add_qml_module(${APPLICATION_NAME}
         qml/Main.qml
         ${BASE_COMPONENTS}
         ${PANELS_COMPONENTS}
-        qml/themes/Theme.qml
-    SOURCES
-
+        qml/themes/Theme.qml 
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

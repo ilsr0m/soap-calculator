@@ -13,20 +13,20 @@ void IJsonRepository::load()
     if(doc.isObject()) {
         QJsonObject obj = doc.object();
 
+        // Выгрузка липидов из json
         QJsonArray lipids =  obj.value("lipids").toArray();
-        for(const auto& v : lipids) {
-            _repository.lipids.insert(v.toObject().value("id").toString(), toLipid(v));
-        }
+        for(const auto& v : lipids)
+            _repository.lipids.append(toLipid(v));
 
+        // Выгрузка кислот из json
         QJsonArray acids =  obj.value("acids").toArray();
-        for(const auto& v : acids) {
-            _repository.acids.insert(v.toObject().value("id").toString(), toAcid(v));
-        }
+        for(const auto& v : acids)
+            _repository.acids.append(toAcid(v));
 
+        // Выгрузка дополнительных ингредиентов из json
         QJsonArray additives =  obj.value("additives").toArray();
-        for(const auto& v : additives) {
-            _repository.additives.insert(v.toObject().value("id").toString(), toAdditive(v));
-        }
+        for(const auto& v : additives)
+            _repository.additives.append(toAdditive(v));
     }
 
     // return *this;
@@ -35,6 +35,7 @@ void IJsonRepository::load()
 LipidProfile IJsonRepository::toLipid(const QJsonValue& val)
 {
     LipidProfile profile;
+    profile.id = val.toObject().value("id").toString();
 
     auto name = val.toObject().value("name");
     profile.name.en = name.toObject().value("en").toString();
@@ -55,6 +56,7 @@ LipidProfile IJsonRepository::toLipid(const QJsonValue& val)
 AcidProfile IJsonRepository::toAcid(const QJsonValue &val)
 {
     AcidProfile profile;
+    profile.id = val.toObject().value("id").toString();
 
     auto name = val.toObject().value("name");
     profile.name.en = name.toObject().value("en").toString();
@@ -70,6 +72,8 @@ AcidProfile IJsonRepository::toAcid(const QJsonValue &val)
 AdditiveProfile IJsonRepository::toAdditive(const QJsonValue &val)
 {
     AdditiveProfile profile;
+    profile.id = val.toObject().value("id").toString();
+
     auto name = val.toObject().value("name");
     profile.name.en = name.toObject().value("en").toString();
     profile.name.ru = name.toObject().value("ru").toString();

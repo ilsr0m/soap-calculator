@@ -8,9 +8,9 @@
 
 struct RepositoryEntities
 {
-    QLipidMap lipids;
-    QAcidMap acids;
-    QAdditiveMap additives;
+    LipidContainer lipids;
+    AcidContainer acids;
+    AdditiveContainer additives;
 };
 
 class IRepository
@@ -32,8 +32,8 @@ public:
 
 private:
     LipidProfile    toLipid   (const QJsonValue& val);
-    AcidProfile     toAcid    (const QJsonValue& val);
-    AdditiveProfile toAdditive(const QJsonValue& val);
+    AcidProfile      toAcid    (const QJsonValue& val);
+    AdditiveProfile  toAdditive(const QJsonValue& val);
 
     QString _source;
 };
