@@ -33,7 +33,6 @@ set(SERVICE_SOURCES
     src/services/database-service/database.h
 )
 set(MODELS
-    src/models/base_model.cpp
     src/models/base_model.h
     src/models/lipid-model/lipid_model.cpp
     src/models/lipid-model/lipid_model.h
@@ -41,11 +40,13 @@ set(MODELS
     src/models/acid-model/acid_model.h
     src/models/additive-model/additive_model.cpp
     src/models/additive-model/additive_model.h
+    src/models/filter-proxy-model/ingredient_filter_proxy_model.h
 )
 
 set(INCLUDES
     include/soap_params.h
     include/utils.h
+    include/roles/model_roles.h
 )
 
 set(OTHER_FILES
@@ -70,11 +71,13 @@ qt_add_resources(${APPLICATION_NAME}
             resources/icons/info.svg
             resources/icons/edit.svg
             resources/icons/settings.svg
+            resources/icons/check.svg
 )
 
 target_include_directories(${APPLICATION_NAME}
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/roles
         ${CMAKE_CURRENT_SOURCE_DIR}/src/services/json-service
         ${CMAKE_CURRENT_SOURCE_DIR}/src/services/database-service
         ${CMAKE_CURRENT_SOURCE_DIR}/src/interfaces/repository-interface
@@ -84,6 +87,7 @@ target_include_directories(${APPLICATION_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/models/acid-model
         ${CMAKE_CURRENT_SOURCE_DIR}/src/models/additive-model
         ${CMAKE_CURRENT_SOURCE_DIR}/src/models/lipid-model
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/models/filter-proxy-model
         ${CMAKE_CURRENT_SOURCE_DIR}/src/app/app-settings
 )
 
@@ -101,6 +105,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
 
 set(BASE_COMPONENTS
     qml/components/base/BaseButton.qml
+    qml/components/base/BaseCheckbox.qml
 )
 
 set(PANELS_COMPONENTS

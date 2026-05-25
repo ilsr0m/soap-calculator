@@ -7,16 +7,12 @@
 
 #include "soap_params.h"
 
+
 class AcidModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
     explicit AcidModel(QObject *parent = nullptr);
-
-    enum Roles {
-        IdRole = Qt::UserRole + 1,
-        NameRole
-    };
 
     void setModel(const QVariant& data);
 
@@ -27,8 +23,11 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
+    void sortByCurrentLanguage();
+
+private:
     AcidContainer _acids;
-    QList<int> _roles = {IdRole, NameRole};
+    // QList<int> _roles = {Roles::IdRole, Roles::NameRole};
 };
 
 #endif // ACID_MODEL_H

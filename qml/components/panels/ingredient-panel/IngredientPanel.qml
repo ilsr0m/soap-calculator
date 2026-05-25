@@ -35,13 +35,13 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height * 0.10
             watermark: root.searchWatermark
+            model: root.model
         }
 
         IngredientView {
             Layout.fillWidth: true
             Layout.fillHeight: true
             model: root.model
-
         }
 
         IngredientButtons {

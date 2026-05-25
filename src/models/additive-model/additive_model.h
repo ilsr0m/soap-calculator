@@ -6,16 +6,12 @@
 
 #include "soap_params.h"
 
+
 class AdditiveModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
     explicit AdditiveModel(QObject *parent = nullptr);
-
-    enum Roles {
-        IdRole = Qt::UserRole + 1,
-        NameRole
-    };
 
     void setModel(const QVariant &data);
 
@@ -27,7 +23,6 @@ protected:
 
 private:
     AdditiveContainer _additives;
-    QList<int> _roles = {IdRole, NameRole};
 };
 
 #endif // ACID_MODEL_H

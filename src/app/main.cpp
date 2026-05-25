@@ -12,6 +12,8 @@
 #include "acid_model.h"
 #include "additive_model.h"
 
+#include "ingredient_filter_proxy_model.h"
+
 #include "app_settings.h"
 
 int main(int argc, char *argv[])
@@ -21,21 +23,32 @@ int main(int argc, char *argv[])
     QString src = "F:\\Projects\\QT\\soap-calculator\\data\\repository.json";
     Database database(new IJsonRepository(src));
 
+    // Инициализация модели - липиды
     LipidModel lipidModel = LipidModel();
-    lipidModel.setModel(QVariant::fromValue(database.lipids()));
+    lipidModel.setModel(QVariant::fromValue(database.lipids()));   
+    IngredientFilterProxyModel lipidProxyModel;
+    lipidProxyModel.setSourceModel(&lipidModel);
+    lipidProxyModel.sort(0);
 
+    // Инициализация модели - кислоты
     AcidModel acidModel = AcidModel();
     acidModel.setModel(QVariant::fromValue(database.acids()));
+    IngredientFilterProxyModel acidProxyModel;
+    acidProxyModel.setSourceModel(&acidModel);
+    acidProxyModel.sort(0);
 
+    // Инициализация модели -  дополнительные игредиенты
     AdditiveModel additiveModel = AdditiveModel();
     additiveModel.setModel(QVariant::fromValue(database.additives()));
+    IngredientFilterProxyModel additiveProxyModel;
+    additiveProxyModel.setSourceModel(&additiveModel);
+    additiveProxyModel.sort(0);
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("appSettings", &AppSettings::instance());
-
-    engine.rootContext()->setContextProperty("lipidModel", &lipidModel);
-    engine.rootContext()->setContextProperty("acidModel", &acidModel);
-    engine.rootContext()->setContextProperty("additiveModel", &additiveModel);
+    engine.rootContext()->setContextProperty("lipidProxyModel"   , &lipidProxyModel   );
+    engine.rootContext()->setContextProperty("acidProxyModel"    , &acidProxyModel    );
+    engine.rootContext()->setContextProperty("additiveProxyModel", &additiveProxyModel);
 
     QObject::connect(
         &engine,

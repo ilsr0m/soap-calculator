@@ -8,7 +8,6 @@ Window {
     id: mainRoot
 
     // Theme { id: theme }
-
     width: 1100
     height: 800
     visible: true
@@ -19,10 +18,12 @@ Window {
     title: qsTr("SOAP CALCULATOR")
 
     property int gap: 6
-
     color: Theme.mainWindow
 
-    Component.onCompleted: { appSettings.language = "ru" }
+    // Инструкции к программе после загрузки Window
+    Component.onCompleted: {
+        appSettings.language = "en"
+    }
 
     RowLayout
     {
@@ -37,6 +38,7 @@ Window {
             Layout.minimumWidth: 220
             Layout.maximumWidth: 420
 
+            // Блок с липидами
             IngredientPanel {
                 // radius: Theme.radius
                 width : parent.width  * 0.25
@@ -45,9 +47,9 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE LIPIDS")
-                model: lipidModel
+                model: lipidProxyModel
             }
-
+            // Блок с кислотами
             IngredientPanel {
                 // radius: Theme.radius
                 width : parent.width  * 0.25
@@ -56,9 +58,10 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE ACIDS")
-                model: acidModel
+                model: acidProxyModel
             }
 
+            // Блок с дополнительными ингредиентами
             IngredientPanel {
                 // radius: Theme.radius
                 width : parent.width  * 0.25
@@ -67,7 +70,7 @@ Window {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 title: qsTr("CHOOSE ADDITIVES")
-                model: additiveModel
+                model: additiveProxyModel
             }
         }
 

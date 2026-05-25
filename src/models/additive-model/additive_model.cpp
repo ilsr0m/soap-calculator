@@ -1,5 +1,7 @@
 #include "additive_model.h"
+
 #include "app_settings.h"
+#include "model_roles.h"
 
 AdditiveModel::AdditiveModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -7,16 +9,7 @@ AdditiveModel::AdditiveModel(QObject *parent)
     connect(&AppSettings::instance(), &AppSettings::languageChanged, this, [this]() {
         if(_additives.empty())
             return;
-        emit dataChanged(index(0), index(rowCount() - 1), _roles);
-
-        beginResetModel();
-
-        std::sort(_additives.begin(), _additives.end(), [](const AdditiveProfile &a, const AdditiveProfile &b) {
-            const QString lang = AppSettings::instance().language();
-            return a.name.value(lang).localeAwareCompare(b.name.value(lang)) < 0;
-        });
-
-        endResetModel();
+        emit dataChanged(index(0), index(rowCount() - 1), { Roles::NameRole });
     });
 }
 
@@ -26,6 +19,8 @@ void AdditiveModel::setModel(const QVariant &data)
         qWarning() << "Invalid data type for AdditiveModel";
         return;
     }
+
+    beginResetModel();
     _additives = data.value<AdditiveContainer>();
     endResetModel();
 }
@@ -48,13 +43,10 @@ QVariant AdditiveModel::data(const QModelIndex &index, int role) const
     // const QString& id = _additives[index.row()];
     const AdditiveProfile& additive = _additives[index.row()];
 
-    if (!_additives.contains(additive))
-        return QVariant();
-
     switch(role) {
-    case NameRole:
+    case Roles::NameRole:
         return additive.name.value(AppSettings::instance().language());
-    case IdRole:
+    case Roles::IdRole:
         return additive.id;
     }
     return QVariant();
@@ -63,8 +55,9 @@ QVariant AdditiveModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> AdditiveModel::roleNames() const
 {
     return {
-        {NameRole, "name"},
-        {IdRole, "id"}
+        {Roles::NameRole, "name"},
+        {Roles::IdRole, "id"}
     };
 }
+
 

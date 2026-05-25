@@ -9,6 +9,7 @@ Rectangle {
     color: Theme.panel
 
     property string watermark: "search..."
+    property var model
 
     RowLayout {
         id: searchRow
@@ -67,7 +68,10 @@ Rectangle {
 
                         onTextChanged: {
                             //  TODO: Отображать только соответствующие игредиенты если введенное слово есть в имени
-                            console.log("text changed: " + appSettings.language)
+                            // console.log("text changed: " + appSettings.language)
+                            model.searchText = text
+                            // searchInput.text - введеные в поисковом окне текст
+
                         }
                     }
                 }

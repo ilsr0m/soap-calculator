@@ -91,6 +91,16 @@ QtObject {
     readonly property color listItemTextHover  : config._color_1
     readonly property color listItemTextPressed: config._color_1
 
+    // Checkbox
+    readonly property string checkboxIconPath: "qrc:/resources/icons/check.svg"
+    readonly property color checkbox             : config._color_1
+    readonly property color checkboxHover        : config._color_2
+    readonly property color checkboxPressed      : config._color_3
+    readonly property color checkboxBorder       : config._color_2
+    readonly property color checkboxBorderHover  : config._color_1
+    readonly property color checkboxBorderPressed: config._color_1
+
+
     readonly property int spacing: 8
 
     readonly property int animationDuration: 100

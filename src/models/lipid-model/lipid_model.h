@@ -11,24 +11,17 @@ class LipidModel : public QAbstractListModel
     Q_OBJECT
 public:
     explicit LipidModel(QObject * parent = nullptr);
-
-    enum Roles {
-        IdRole = Qt::UserRole + 1,
-        NameRole,
-        TypeRole
-    };
-
     void setModel(const QVariant& data);
 
     int rowCount(const QModelIndex& parent = {}) const override;
     QVariant data(const QModelIndex& index, int role) const override;
-
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 protected:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
     LipidContainer _lipids;
-    QList<int> _roles = {IdRole, NameRole, TypeRole};
+    QSet<QString> _checkedItems;
 };
 
 #endif // SOAP_CORE_H

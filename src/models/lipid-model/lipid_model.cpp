@@ -1,6 +1,6 @@
 #include "lipid_model.h"
 #include "app_settings.h"
-#include <algorithm>
+#include "model_roles.h"
 
 LipidModel::LipidModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -8,16 +8,7 @@ LipidModel::LipidModel(QObject *parent)
     connect(&AppSettings::instance(), &AppSettings::languageChanged, this, [this]() {
         if(_lipids.empty())
             return;
-        emit dataChanged(index(0), index(rowCount() - 1), _roles);
-
-        beginResetModel();
-
-        std::sort(_lipids.begin(), _lipids.end(), [](const LipidProfile &a, const LipidProfile &b) {
-            const QString lang = AppSettings::instance().language();
-            return a.name.value(lang).localeAwareCompare(b.name.value(lang)) < 0;
-        });
-
-        endResetModel();
+        emit dataChanged(index(0), index(rowCount() - 1), { Roles::NameRole });
     });
 }
 
@@ -27,6 +18,8 @@ void LipidModel::setModel(const QVariant &data)
         qWarning() << "Invalid data type for AdditiveModel";
         return;
     }
+
+    beginResetModel();
     _lipids = data.value<LipidContainer>();
     endResetModel();
 }
@@ -49,26 +42,52 @@ QVariant LipidModel::data(const QModelIndex &index, int role) const
     // const QString& id = ;
     const LipidProfile& lipid = _lipids[index.row()];
 
-    if (!_lipids.contains(lipid))
-        return QVariant();
+    // if (!_lipids.contains(lipid))
+    //     return QVariant();
 
     switch(role) {
-        case NameRole:
+        case Roles::NameRole:
             return lipid.name.value(AppSettings::instance().language());
-        case TypeRole:
+        case Roles::TypeRole:
             return lipid.type.value(AppSettings::instance().language());
-        case IdRole:
+        case Roles::CheckedRole:
+            return _checkedItems.contains(lipid.id);
+        case Roles::IdRole:
             return lipid.id;
     }
     return QVariant();
 }
 
+bool LipidModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (!index.isValid() || index.row() < 0 || index.row() >= _lipids.size())
+        return false;
+
+    auto& item = _lipids[index.row()];
+    switch (role) {
+        case Roles::NameRole:
+            item.name.value(AppSettings::instance().language()) = value.toString();
+            emit dataChanged(index, index, { Roles::NameRole });
+            return true;
+        case Roles::CheckedRole:
+            bool checked  = value.toBool();
+            if(checked) _checkedItems.insert(item.id);
+            else _checkedItems.remove(item.id);
+
+            emit dataChanged(index, index, { Roles::CheckedRole });
+            return true;
+    }
+
+    return false;
+}
+
 QHash<int, QByteArray> LipidModel::roleNames() const
 {
     return {
-        {NameRole, "name"},
-        {TypeRole, "type"},
-        {IdRole  , "id"}
+        {Roles::NameRole   , "name"   },
+        {Roles::TypeRole   , "type"   },
+        {Roles::IdRole     , "id"     },
+        {Roles::CheckedRole, "checked"}
     };
 }
 

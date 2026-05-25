@@ -21,57 +21,121 @@ Rectangle {
         flickableDirection: Flickable.VerticalFlick
         ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
 
-        delegate: Rectangle {
+        focus: true
 
+        delegate: Rectangle {
             id: viewDelegate
 
             width: ListView.view.width
             height: listArea.height * 0.2
 
-            function resolveColor(normal, hover, selected) {
-                if (ListView.isCurrentItem)
-                    return selected
+            RowLayout {
+                anchors.fill: parent
+                spacing: 0
+                // Оборачиваем checkbox
+                Item {
+                    // Layout.fillHeight: true
+                    Layout.preferredHeight: parent.height
+                    Layout.preferredWidth : parent.height
 
-                if(mouseArea.pressed)
+                    BaseCheckbox {
+                        id: checkbox
+                        width: parent.width * 0.8
+                        height: parent.height * 0.8
+                        anchors.centerIn: parent
+
+                        accentColor: viewDelegate.contentColor
+
+                        checked: model.checked === undefined ? false : model.checked
+                        onClicked: {
+                                model.checked = !model.checked
+                        }
+                    }
+                }
+
+                // Оборачиваем текст
+                Item {
+                    Layout.fillWidth: true
+                    Text {
+                        id: textName
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 10
+
+                        color: viewDelegate.contentColor
+
+                        text: model.name
+                        font.pixelSize: listArea.height * 0.1
+                        font.bold: true
+                    }
+                }
+
+            }
+
+            // Поведение палитры делегата
+            function resolveColor(normal, hover, selected) {
+                if (ListView.isCurrentItem) {
                     return selected
-                if(mouseArea.containsMouse)
+                }
+                if(tapHandler.pressed){
+                    return selected
+                }
+                if(hoverHandler.hovered){
                     return hover
+                }
                 return normal
             }
 
-            Text {
-                color: viewDelegate.resolveColor(Theme.listItemText,
-                                                 Theme.listItemTextHover,
-                                                 Theme.listItemTextPressed)
+            color: viewDelegate.resolveColor(
+                Theme.listItem,Theme.listItemHover,Theme.listItemPressed)
+            property color contentColor: viewDelegate.resolveColor(
+                Theme.listItemText, Theme.listItemTextHover,Theme.listItemTextPressed)
 
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: 10
-                text: name
-
-                font.pixelSize: listArea.height * 0.1
-                font.bold: true
-            }
-
-            color: viewDelegate.resolveColor(Theme.listItem,
-                                             Theme.listItemHover,
-                                             Theme.listItemPressed)
-            signal clicked
-            Behavior on color { ColorAnimation { duration: Theme.animationDuration } }
-            MouseArea {
-                id: mouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-
-                acceptedButtons: Qt.LeftButton | Qt.RightButton
-                onClicked: function(mouse) {
-                    if(mouse.button === Qt.LeftButton)
-                        listView.currentIndex = index
-                    if(mouse.button === Qt.RightButton)
-                        listView.currentIndex = -1
+            // Поведение списка при работе с компьютерной мышью
+            Behavior on color {
+                ColorAnimation {
+                    duration: Theme.animationDuration
                 }
             }
+
+            HoverHandler {
+                id: hoverHandler
+                cursorShape: Qt.PointingHandCursor
+                onHoveredChanged: function() {
+
+                }
+            }
+
+            TapHandler {
+                id: tapHandler
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onTapped: function(eventPoint, button) {
+
+                    if(button === Qt.LeftButton) {
+                        listView.currentIndex =
+                                (listView.currentIndex === index) ? -1 : index
+                    }
+                    if(button === Qt.RightButton) {
+                        listView.currentIndex = -1
+                    }
+                }
+
+                onDoubleTapped: {
+                    model.checked = !model.checked
+                }
+            }
+
+            // Keys.onReturnPressed: {
+            //     if (currentIndex >= 0)
+            //             model.setData(
+            //                 model.index(currentIndex, 0),
+            //                 !model.data(
+            //                     model.index(currentIndex, 0),
+            //                     Roles.CheckedRole
+            //                 ),
+            //                 Roles.CheckedRole
+            //             )
+            //     }
         }
     }
 }

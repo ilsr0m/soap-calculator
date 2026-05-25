@@ -5,6 +5,12 @@
 #include <QString>
 #include <QMetaType>
 
+// struct Properties {
+//     qreal solidity;
+//     qreal bubbly;
+//     qreal iodine;
+// };
+
 // Lipid data
 // Йодовое число
 struct Iodine {
@@ -38,7 +44,6 @@ struct LipidProfile {
     ComponentName name;
     Sap sap;        // сапонификационное число
     Iodine iodine;  // йодовое значение
-
     bool operator==(const LipidProfile& other) const { return id == other.id; }
 };
 using LipidContainer = QVector<LipidProfile>;

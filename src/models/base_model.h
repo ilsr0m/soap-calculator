@@ -1,10 +1,15 @@
 #ifndef BASE_MODEL
 #define BASE_MODEL
 
-class BaseModel {
+#include <QObject>
+#include <QAbstractListModel>
+
+class ISoapModel : public QAbstractListModel
+{
+
 public:
-    explicit BaseModel() {}
-    void dummy();
+    virtual ~ISoapModel() = default;
+    virtual void load() = 0;
 };
 
 #endif //
