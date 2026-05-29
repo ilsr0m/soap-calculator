@@ -1,5 +1,5 @@
-#ifndef JSON_MANAGER_H
-#define JSON_MANAGER_H
+#ifndef JSONMANAGER_H
+#define JSONMANAGER_H
 
 #include <QJsonDocument>
 #include <QFile>
@@ -33,4 +33,4 @@ private:
     QJsonDocument _document;
 };
 
-#endif // JSON_MANAGER_H
+#endif // JSONMANAGER_H

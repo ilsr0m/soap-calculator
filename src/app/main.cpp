@@ -6,7 +6,7 @@
 
 // #include "soap_core.h"
 #include "ijson_repository.h"
-#include "database.h"
+#include "DatabaseManager.h"
 
 #include "lipid_model.h"
 #include "acid_model.h"
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QString src = "F:\\Projects\\QT\\soap-calculator\\data\\repository.json";
-    Database database(new IJsonRepository(src));
+    RepositoryManager database(new IJsonRepository(src));
 
     // Инициализация модели - липиды
     LipidModel lipidModel = LipidModel();

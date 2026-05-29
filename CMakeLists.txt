@@ -27,10 +27,10 @@ set(INTERFACE_SOURCES
 )
 
 set(SERVICE_SOURCES
-    src/services/json-service/json_manager.cpp
-    src/services/json-service/json_manager.h
-    src/services/database-service/database.cpp
-    src/services/database-service/database.h
+    src/services/json-service/JsonManager.cpp
+    src/services/json-service/JsonManager.h
+    src/services/database-service/DatabaseManager.cpp
+    src/services/database-service/DatabaseManager.h
 )
 set(MODELS
     src/models/base_model.h

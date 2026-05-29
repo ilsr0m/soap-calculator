@@ -6,7 +6,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-class IJsonRepository : public IRepository {
+class IJsonRepository : public IRepositoryManageable {
 public:
     IJsonRepository(QString source);
     virtual void load() override;

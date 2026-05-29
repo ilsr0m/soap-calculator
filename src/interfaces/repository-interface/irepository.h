@@ -10,10 +10,10 @@ struct RepositoryEntities
     AdditiveContainer additives;
 };
 
-class IRepository
+class IRepositoryManageable
 {
 public:
-    virtual ~IRepository() = default;
+    virtual ~IRepositoryManageable() = default;
     virtual void load() = 0;
 
     inline const RepositoryEntities& repository() const { return _repository; }

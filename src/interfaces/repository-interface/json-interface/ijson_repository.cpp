@@ -1,7 +1,7 @@
 #include "ijson_repository.h"
-#include "json_manager.h"
+#include "JsonManager.h"
 
-IJsonRepository::IJsonRepository(QString source) : IRepository()
+IJsonRepository::IJsonRepository(QString source) : IRepositoryManageable()
 {
     _source = std::move(source);
 }
