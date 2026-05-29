@@ -1,5 +1,5 @@
-#ifndef IREPOSITORY_H
-#define IREPOSITORY_H
+#ifndef IREPOSITORYMANAGEABLE_H
+#define IREPOSITORYMANAGEABLE_H
 
 #include "soap_params.h"
 
@@ -23,4 +23,4 @@ protected:
 };
 
 
-#endif // IREPOSITORY_H
+#endif // IREPOSITORYMANAGEABLE_H

@@ -1,5 +1,5 @@
-#include "lipid_model.h"
-#include "app_settings.h"
+#include "LipidModel.h"
+#include "AppSettings.h"
 #include "model_roles.h"
 
 LipidModel::LipidModel(QObject *parent)

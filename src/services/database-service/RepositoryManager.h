@@ -1,7 +1,7 @@
-#ifndef DATABASEMANAGER_H
-#define DATABASEMANAGER_H
+#ifndef REPOSITORYMANAGER_H
+#define REPOSITORYMANAGER_H
 
-#include "irepository.h"
+#include "IRepositoryManageable.h"
 
 /**
  * @brief Manages repository data containers.
@@ -46,4 +46,4 @@ private:
     AdditiveContainer _additives;
 };
 
-#endif // DATABASEMANAGER_H
+#endif // REPOSITORYMANAGER_H

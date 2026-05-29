@@ -1,7 +1,7 @@
 #ifndef IJSON_REPOSITORY_H
 #define IJSON_REPOSITORY_H
 
-#include "irepository.h"
+#include "IRepositoryManageable.h"
 
 #include <QJsonObject>
 #include <QJsonArray>

@@ -1,6 +1,6 @@
-#include "acid_model.h"
+#include "AcidModel.h"
 
-#include "app_settings.h"
+#include "AppSettings.h"
 #include "model_roles.h"
 
 AcidModel::AcidModel(QObject *parent)

@@ -1,4 +1,4 @@
-#include "app_settings.h"
+#include "AppSettings.h"
 
 AppSettings AppSettings::_settings;
 

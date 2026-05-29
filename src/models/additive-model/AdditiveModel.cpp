@@ -1,6 +1,6 @@
-#include "additive_model.h"
+#include "AdditiveModel.h"
 
-#include "app_settings.h"
+#include "AppSettings.h"
 #include "model_roles.h"
 
 AdditiveModel::AdditiveModel(QObject *parent)

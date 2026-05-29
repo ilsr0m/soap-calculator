@@ -1,4 +1,4 @@
-#include "soap_core.h"
+#include "SoapCore.h"
 
 const RecipeOutput SoapCore::calculate(const RecipeInput &input)
 {

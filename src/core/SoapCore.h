@@ -1,5 +1,5 @@
-#ifndef SOAP_CORE_H
-#define SOAP_CORE_H
+#ifndef SOAPCORE_H
+#define SOAPCORE_H
 
 #include "soap_params.h"
 
@@ -9,4 +9,4 @@ public:
     static const RecipeOutput calculate(const RecipeInput &input);
 };
 
-#endif // SOAP_CORE_H
+#endif // SOAPCORE_H

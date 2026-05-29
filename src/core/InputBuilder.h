@@ -1,5 +1,5 @@
-#ifndef INPUT_BUILDER_H
-#define INPUT_BUILDER_H
+#ifndef INPUTBUILDER_H
+#define INPUTBUILDER_H
 
 #include "soap_params.h"
 
@@ -60,4 +60,4 @@ private:
     RecipeInput _input;
 };
 
-#endif // INPUT_BUILDER_H
+#endif // INPUTBUILDER_H

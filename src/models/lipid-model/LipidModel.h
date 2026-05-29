@@ -1,5 +1,5 @@
-#ifndef LIPID_MODEL_H
-#define LIPID_MODEL_H
+#ifndef LIPIDMODEL_H
+#define LIPIDMODEL_H
 
 #include <QObject>
 #include <QAbstractListModel>

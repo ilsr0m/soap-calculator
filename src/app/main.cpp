@@ -6,15 +6,15 @@
 
 // #include "soap_core.h"
 #include "ijson_repository.h"
-#include "DatabaseManager.h"
+#include "RepositoryManager.h"
 
-#include "lipid_model.h"
-#include "acid_model.h"
-#include "additive_model.h"
+#include "LipidModel.h"
+#include "AcidModel.h"
+#include "AdditiveModel.h"
 
-#include "ingredient_filter_proxy_model.h"
+#include "IngredientFilterProxyModel.h"
 
-#include "app_settings.h"
+#include "AppSettings.h"
 
 int main(int argc, char *argv[])
 {

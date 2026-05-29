@@ -11,17 +11,17 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 qt_standard_project_setup(REQUIRES 6.5)
 
 set(CORE_SOURCES
-    src/core/soap_core.cpp
-    src/core/soap_core.h
-    src/core/input_builder.cpp
-    src/core/input_builder.h
+    src/core/SoapCore.cpp
+    src/core/SoapCore.h
+    src/core/InputBuilder.cpp
+    src/core/InputBuilder.h
 
-    src/app/app-settings/app_settings.h
-    src/app/app-settings/app_settings.cpp
+    src/app/app-settings/AppSettings.h
+    src/app/app-settings/AppSettings.cpp
 )
 
 set(INTERFACE_SOURCES
-    src/interfaces/repository-interface/irepository.h
+    src/interfaces/repository-interface/IRepositoryManageable.h
     src/interfaces/repository-interface/json-interface/ijson_repository.cpp
     src/interfaces/repository-interface/json-interface/ijson_repository.h
 )
@@ -29,18 +29,18 @@ set(INTERFACE_SOURCES
 set(SERVICE_SOURCES
     src/services/json-service/JsonManager.cpp
     src/services/json-service/JsonManager.h
-    src/services/database-service/DatabaseManager.cpp
-    src/services/database-service/DatabaseManager.h
+    src/services/database-service/RepositoryManager.cpp
+    src/services/database-service/RepositoryManager.h
 )
 set(MODELS
     src/models/base_model.h
-    src/models/lipid-model/lipid_model.cpp
-    src/models/lipid-model/lipid_model.h
-    src/models/acid-model/acid_model.cpp
-    src/models/acid-model/acid_model.h
-    src/models/additive-model/additive_model.cpp
-    src/models/additive-model/additive_model.h
-    src/models/filter-proxy-model/ingredient_filter_proxy_model.h
+    src/models/lipid-model/LipidModel.cpp
+    src/models/lipid-model/LipidModel.h
+    src/models/acid-model/AcidModel.cpp
+    src/models/acid-model/AcidModel.h
+    src/models/additive-model/AdditiveModel.cpp
+    src/models/additive-model/AdditiveModel.h
+    src/models/filter-proxy-model/IngredientFilterProxyModel.h
 )
 
 set(INCLUDES

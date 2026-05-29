@@ -1,4 +1,4 @@
-#include "DatabaseManager.h"
+#include "RepositoryManager.h"
 
 RepositoryManager::RepositoryManager(IRepositoryManageable *repository) {
     if(repository) {

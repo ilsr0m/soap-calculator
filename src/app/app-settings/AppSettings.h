@@ -1,5 +1,5 @@
-#ifndef APP_SETTINGS_H
-#define APP_SETTINGS_H
+#ifndef APPSETTINGS_H
+#define APPSETTINGS_H
 
 #include <QObject>
 #include <QString>
@@ -26,4 +26,4 @@ private:
     QString _language = "en";
 };
 
-#endif // APP_SETTINGS_H
+#endif // APPSETTINGS_H

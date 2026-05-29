@@ -1,5 +1,5 @@
-#ifndef ADDITIVE_MODEL_H
-#define ADDITIVE_MODEL_H
+#ifndef ADDITIVEMODEL_H
+#define ADDITIVEMODEL_H
 
 #include <QObject>
 #include <QAbstractListModel>

@@ -1,5 +1,5 @@
-#ifndef ACID_MODEL_H
-#define ACID_MODEL_H
+#ifndef ACIDMODEL_H
+#define ACIDMODEL_H
 
 #include <QObject>
 #include <QAbstractListModel>
@@ -30,4 +30,4 @@ private:
     // QList<int> _roles = {Roles::IdRole, Roles::NameRole};
 };
 
-#endif // ACID_MODEL_H
+#endif // ACIDMODEL_H
