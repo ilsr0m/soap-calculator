@@ -1,5 +1,5 @@
 #include "ijson_repository.h"
-#include "json_loader.h"
+#include "json_manager.h"
 
 IJsonRepository::IJsonRepository(QString source) : IRepository()
 {
@@ -8,7 +8,7 @@ IJsonRepository::IJsonRepository(QString source) : IRepository()
 
 void IJsonRepository::load()
 {
-    QJsonDocument doc = JsonLoader().load(_source).document();
+    QJsonDocument doc = JsonManager().load(_source).document();
 
     if(doc.isObject()) {
         QJsonObject obj = doc.object();

@@ -1,10 +1,10 @@
-#include "json_loader.h"
+#include "json_manager.h"
 
-JsonLoader::JsonLoader() {}
+JsonManager::JsonManager() {}
 
-JsonLoader& JsonLoader::load(QString sourse)
+JsonManager& JsonManager::load(const QString& source)
 {
-    QFile jFile(sourse);
+    QFile jFile(source);
 
     if(!jFile.open(QIODevice::ReadOnly)){
         qWarning()<<"Can not open json file";

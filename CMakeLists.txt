@@ -27,8 +27,8 @@ set(INTERFACE_SOURCES
 )
 
 set(SERVICE_SOURCES
-    src/services/json-service/json_loader.cpp
-    src/services/json-service/json_loader.h
+    src/services/json-service/json_manager.cpp
+    src/services/json-service/json_manager.h
     src/services/database-service/database.cpp
     src/services/database-service/database.h
 )
