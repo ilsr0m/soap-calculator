@@ -1,33 +1,13 @@
-#ifndef SOAP_PARAMS_H
-#define SOAP_PARAMS_H
+#ifndef SOAPTYPES_H
+#define SOAPTYPES_H
 
 #include <QVector>
 #include <QString>
 #include <QMetaType>
 
-// struct Properties {
-//     qreal solidity;
-//     qreal bubbly;
-//     qreal iodine;
-// };
-
-// Lipid data
-// Йодовое число
-struct Iodine {
-    qreal min = 0;
-    qreal max = 0;
-    qreal avg = 0;
-};
-
-struct Sap {
-    qreal NaOH = 0;
-    qreal KOH = 0;
-};
-
 struct ComponentName {
     QString en;
     QString ru;
-
     QString value(const QString& lang) const {
         if (lang == "ru")
             return ru;
@@ -37,13 +17,37 @@ struct ComponentName {
     }
 };
 
+/**
+ * @brief Properties of
+ */
+struct LipidProperties {
+    qreal hardness = 0;
+    qreal cleansing = 0;
+    qreal conditioning = 0;
+    qreal bubbly = 0;
+    qreal creamy = 0;
+    qreal iodine = 0;
+};
+
+struct Sap {
+    qreal sodium = 0;
+    qreal potassium = 0;
+};
+
 // Профиль каждого липида
 struct LipidProfile {
-    QString id;
+    qint32 id;
+
     ComponentName type;
     ComponentName name;
-    Sap sap;        // сапонификационное число
-    Iodine iodine;  // йодовое значение
+    ComponentName comment;
+
+    Sap sap; // сапонификационное число
+    LipidProperties properties;
+
+    QString inciSodium;
+    QString inciPotassium;
+
     bool operator==(const LipidProfile& other) const { return id == other.id; }
 };
 using LipidContainer = QVector<LipidProfile>;
@@ -51,10 +55,15 @@ using LipidContainer = QVector<LipidProfile>;
 Q_DECLARE_METATYPE(LipidProfile)
 
 struct AcidProfile {
-    QString id;
+    qint32 id;
+
     ComponentName name;
+    ComponentName comment;
+
     Sap neutralization;
-    qreal usagePercent = 0;
+
+    QString inciSodium;
+    QString inciPotassium;
 
     bool operator==(const AcidProfile& other) const { return id == other.id; }
 };
@@ -64,10 +73,13 @@ using AcidContainer = QVector<AcidProfile>;
 Q_DECLARE_METATYPE(AcidProfile)
 
 struct AdditiveProfile {
-    QString id;
-    ComponentName name;
-    qreal usagePercent = 0;
+    qint32 id;
 
+    ComponentName type;
+    ComponentName name;
+    ComponentName comment;
+
+    QString inci;
     bool operator==(const AdditiveProfile& other) const { return id == other.id; }
 };
 using AdditiveContainer = QVector<AdditiveProfile>;
@@ -93,8 +105,8 @@ struct AcidInput {
 
 // --------------------------------- //
 struct PercentParameters {
-    qreal KOH = 0;       // Процент гидроксида калия
-    qreal NaOH = 100;    // Процент гидроксида натрия
+    qreal potassium = 0;       // Процент гидроксида калия
+    qreal sodium = 100;    // Процент гидроксида натрия
     qreal water = 33;    // Процент воды от общей массы масел
     qreal superfat = 5;  // Пережир
     qreal additionalSuperfat = 0; // Дополнительный пережир (исп. в холодном способе)

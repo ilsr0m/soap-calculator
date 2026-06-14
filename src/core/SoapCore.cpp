@@ -30,13 +30,13 @@ const RecipeOutput SoapCore::calculate(const RecipeInput &input)
     // Расчет массы щелочей
     const qreal superfatFactor = 1 - (input.basePercents.superfat / 100.0);
     qreal NaOHMassForLipids = 0;
-    qreal NaOHPercent = input.basePercents.NaOH / 100.0;
+    qreal NaOHPercent = input.basePercents.sodium / 100.0;
     qreal KOHMassForLipids = 0;
-    qreal KOHPercent = input.basePercents.KOH / 100.0;
+    qreal KOHPercent = input.basePercents.potassium / 100.0;
 
     for(const LipidOutput& lipidOut : output.lipids){
-        NaOHMassForLipids += lipidOut.profile.sap.NaOH * lipidOut.mass;
-        KOHMassForLipids  += lipidOut.profile.sap.KOH  * lipidOut.mass;
+        NaOHMassForLipids += lipidOut.profile.sap.sodium * lipidOut.mass;
+        KOHMassForLipids  += lipidOut.profile.sap.potassium  * lipidOut.mass;
     }
 
     output.baseMasses.NaOH = NaOHMassForLipids * NaOHPercent * superfatFactor;
@@ -44,8 +44,8 @@ const RecipeOutput SoapCore::calculate(const RecipeInput &input)
 
     // необходимо учесть коэффициенты нейтрализации
     for(const AcidOutput& acidOut : output.acids) {
-        output.baseMasses.NaOH += acidOut.profile.neutralization.NaOH * acidOut.mass;
-        output.baseMasses.KOH  += acidOut.profile.neutralization.KOH  * acidOut.mass;
+        output.baseMasses.NaOH += acidOut.profile.neutralization.sodium * acidOut.mass;
+        output.baseMasses.KOH  += acidOut.profile.neutralization.potassium  * acidOut.mass;
     }
 
     // Расчет массы дополнительных игридиентов

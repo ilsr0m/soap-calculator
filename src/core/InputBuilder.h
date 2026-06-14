@@ -1,7 +1,7 @@
 #ifndef INPUTBUILDER_H
 #define INPUTBUILDER_H
 
-#include "soap_params.h"
+#include "SoapTypes.h"
 
 class InputBuilder
 {
@@ -28,13 +28,13 @@ public:
         return *this;
     }
 
-    inline InputBuilder& withNaOH(const double value) {
-        _input.basePercents.NaOH = value;
+    inline InputBuilder& withSodium(const double value) {
+        _input.basePercents.sodium = value;
         return *this;
     }
 
-    inline InputBuilder& withKOH(const double value) {
-        _input.basePercents.KOH = value;
+    inline InputBuilder& withPotassium(const double value) {
+        _input.basePercents.potassium = value;
         return *this;
     }
 

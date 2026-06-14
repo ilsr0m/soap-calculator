@@ -1,7 +1,7 @@
 #ifndef SOAPCORE_H
 #define SOAPCORE_H
 
-#include "soap_params.h"
+#include "SoapTypes.h"
 
 class SoapCore
 {

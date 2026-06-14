@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QAbstractListModel>
 
-#include "soap_params.h"
+#include "SoapTypes.h"
 
 class LipidModel : public QAbstractListModel
 {
@@ -21,7 +21,7 @@ protected:
 
 private:
     LipidContainer _lipids;
-    QSet<QString> _checkedItems;
+    QSet<qint32> _checkedItems;
 };
 
 #endif // SOAP_CORE_H

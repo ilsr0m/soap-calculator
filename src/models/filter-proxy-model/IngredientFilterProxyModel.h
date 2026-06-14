@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QSortFilterProxyModel>
-#include "model_roles.h"
+#include "ModelRoles.h"
 
 class IngredientFilterProxyModel : public QSortFilterProxyModel
 {

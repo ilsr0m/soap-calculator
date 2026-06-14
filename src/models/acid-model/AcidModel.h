@@ -5,7 +5,7 @@
 #include <QAbstractListModel>
 #include <QHash>
 
-#include "soap_params.h"
+#include "SoapTypes.h"
 
 
 class AcidModel : public QAbstractListModel

@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QAbstractListModel>
 
-#include "soap_params.h"
-
+#include "SoapTypes.h"
+#include <QHash>
 
 class AdditiveModel : public QAbstractListModel
 {
@@ -20,7 +20,6 @@ public:
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
-
 private:
     AdditiveContainer _additives;
 };

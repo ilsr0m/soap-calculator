@@ -1,7 +1,7 @@
 #ifndef IREPOSITORYMANAGEABLE_H
 #define IREPOSITORYMANAGEABLE_H
 
-#include "soap_params.h"
+#include "SoapTypes.h"
 
 struct RepositoryEntities
 {

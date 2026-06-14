@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(APPLICATION_NAME SoapCalculator)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -29,8 +29,8 @@ set(INTERFACE_SOURCES
 set(SERVICE_SOURCES
     src/services/json-service/JsonManager.cpp
     src/services/json-service/JsonManager.h
-    src/services/database-service/RepositoryManager.cpp
-    src/services/database-service/RepositoryManager.h
+    src/services/database-service/DatabaseManager.cpp
+    src/services/database-service/DatabaseManager.h
 )
 set(MODELS
     src/models/base_model.h
@@ -44,13 +44,14 @@ set(MODELS
 )
 
 set(INCLUDES
-    include/soap_params.h
+    include/SoapTypes.h
     include/utils.h
-    include/roles/model_roles.h
+    include/roles/ModelRoles.h
 )
 
 set(OTHER_FILES
-    data/repository.json
+
+    data/ingredients.db
     resources/resources.qrc
 )
 
@@ -142,7 +143,9 @@ set_target_properties(${APPLICATION_NAME} PROPERTIES
 )
 
 target_link_libraries(${APPLICATION_NAME}
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Qt6::Quick
+        Qt6::Sql
 )
 
 include(GNUInstallDirs)

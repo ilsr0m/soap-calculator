@@ -1,6 +1,6 @@
 #include "LipidModel.h"
 #include "AppSettings.h"
-#include "model_roles.h"
+#include "ModelRoles.h"
 
 LipidModel::LipidModel(QObject *parent)
     : QAbstractListModel(parent)

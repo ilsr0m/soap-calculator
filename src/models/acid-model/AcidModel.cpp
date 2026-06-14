@@ -1,7 +1,7 @@
 #include "AcidModel.h"
 
 #include "AppSettings.h"
-#include "model_roles.h"
+#include "ModelRoles.h"
 
 AcidModel::AcidModel(QObject *parent)
     : QAbstractListModel(parent)

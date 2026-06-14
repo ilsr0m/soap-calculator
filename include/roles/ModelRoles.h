@@ -1,5 +1,5 @@
-#ifndef MODEL_ROLES_H
-#define MODEL_ROLES_H
+#ifndef MODELROLES_H
+#define MODELROLES_H
 
 #include <QObject>
 #include <QAbstractListModel>

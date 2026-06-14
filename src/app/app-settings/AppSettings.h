@@ -24,6 +24,7 @@ private:
 
     static AppSettings _settings;
     QString _language = "en";
+
 };
 
 #endif // APPSETTINGS_H

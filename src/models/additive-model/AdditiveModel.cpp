@@ -1,7 +1,7 @@
 #include "AdditiveModel.h"
 
 #include "AppSettings.h"
-#include "model_roles.h"
+#include "ModelRoles.h"
 
 AdditiveModel::AdditiveModel(QObject *parent)
     : QAbstractListModel(parent)

@@ -35,20 +35,20 @@ void IJsonRepository::load()
 LipidProfile IJsonRepository::toLipid(const QJsonValue& val)
 {
     LipidProfile profile;
-    profile.id = val.toObject().value("id").toString();
+    // profile.id = val.toObject().value("id").toString();
 
     auto name = val.toObject().value("name");
     profile.name.en = name.toObject().value("en").toString();
     profile.name.ru = name.toObject().value("ru").toString();
 
     auto sap = val.toObject().value("sap");
-    profile.sap.KOH = sap.toObject().value("KOH").toDouble();
-    profile.sap.NaOH = sap.toObject().value("NaOH").toDouble();
+    profile.sap.potassium = sap.toObject().value("KOH").toDouble();
+    profile.sap.sodium = sap.toObject().value("NaOH").toDouble();
 
     auto iodine = val.toObject().value("iodine");
-    profile.iodine.max = iodine.toObject().value("max").toDouble();
-    profile.iodine.min = iodine.toObject().value("min").toDouble();
-    profile.iodine.avg = iodine.toObject().value("avg").toDouble();
+    // profile.iodine.max = iodine.toObject().value("max").toDouble();
+    // profile.iodine.min = iodine.toObject().value("min").toDouble();
+    // profile.iodine.avg = iodine.toObject().value("avg").toDouble();
 
     return profile;
 }
@@ -56,15 +56,15 @@ LipidProfile IJsonRepository::toLipid(const QJsonValue& val)
 AcidProfile IJsonRepository::toAcid(const QJsonValue &val)
 {
     AcidProfile profile;
-    profile.id = val.toObject().value("id").toString();
+    // profile.id = val.toObject().value("id").toString();
 
     auto name = val.toObject().value("name");
     profile.name.en = name.toObject().value("en").toString();
     profile.name.ru = name.toObject().value("ru").toString();
 
     auto neutralization = val.toObject().value("neutralization");
-    profile.neutralization.KOH = neutralization.toObject().value("KOH").toDouble();
-    profile.neutralization.NaOH = neutralization.toObject().value("NaOH").toDouble();
+    profile.neutralization.potassium = neutralization.toObject().value("KOH").toDouble();
+    profile.neutralization.sodium = neutralization.toObject().value("NaOH").toDouble();
 
     return profile;
 }
@@ -72,7 +72,7 @@ AcidProfile IJsonRepository::toAcid(const QJsonValue &val)
 AdditiveProfile IJsonRepository::toAdditive(const QJsonValue &val)
 {
     AdditiveProfile profile;
-    profile.id = val.toObject().value("id").toString();
+    // profile.id = val.toObject().value("id").toString();
 
     auto name = val.toObject().value("name");
     profile.name.en = name.toObject().value("en").toString();
