@@ -6,7 +6,7 @@ const RecipeOutput SoapCore::calculate(const RecipeInput &input)
 
     // Расчет массы воды
     // Сколько-то там процентов от общей массы липидов
-    output.baseMasses.water = input.baseLipidMass * (input.basePercents.water / 100.00);
+    output.baseMasses.baseLiquid = input.baseLipidMass * (input.basePercents.baseLiquid / 100.00);
     output.baseMasses.additonalSuperfat = input.baseLipidMass * (input.basePercents.additionalSuperfat / 100.00);
 
     // Расчет массы липидов

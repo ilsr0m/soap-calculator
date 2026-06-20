@@ -5,6 +5,9 @@
 #include <QString>
 #include <QMetaType>
 
+// TODO: Добавить рекомендации к additives (например, рекомендуется добавлять до 2% и т. д.) (qreal)
+// TODO: Добавить жирокислотный состав для липидов
+
 struct ComponentName {
     QString en;
     QString ru;
@@ -18,7 +21,7 @@ struct ComponentName {
 };
 
 /**
- * @brief Properties of
+ * @brief Свойства липида
  */
 struct LipidProperties {
     qreal hardness = 0;
@@ -27,6 +30,20 @@ struct LipidProperties {
     qreal bubbly = 0;
     qreal creamy = 0;
     qreal iodine = 0;
+};
+
+/**
+ * @brief Жирнокислотный состав
+ */
+struct FattyComposition {
+    qreal lauric;   // Лауриновая кислота
+    qreal myristic; // Миристиновая кислота
+    qreal palmitic; // Пальмитиновая кислота
+    qreal stearic; // Стеариновая кислота
+    qreal ricinoleic; // Рицинолевая кислота
+    qreal oleic; // Олеиновая кислота
+    qreal linoleic; // Линолевая кислота
+    qreal linolenic; // Линоленовая кислота
 };
 
 struct Sap {
@@ -38,12 +55,13 @@ struct Sap {
 struct LipidProfile {
     qint32 id;
 
-    ComponentName type;
-    ComponentName name;
-    ComponentName comment;
+    ComponentName type; // Тип (Жидкое масло, Твердое масло, Животный жир и т. д.)
+    ComponentName name; // Название липида
+    ComponentName comment; // Комментарий к
 
     Sap sap; // сапонификационное число
-    LipidProperties properties;
+    LipidProperties properties; // показатели свойств
+    FattyComposition fatties; // состав жирных кислот
 
     QString inciSodium;
     QString inciPotassium;
@@ -51,7 +69,6 @@ struct LipidProfile {
     bool operator==(const LipidProfile& other) const { return id == other.id; }
 };
 using LipidContainer = QVector<LipidProfile>;
-// using QLipidMap = QMap<QString, LipidProfile>;
 Q_DECLARE_METATYPE(LipidProfile)
 
 struct AcidProfile {
@@ -67,9 +84,7 @@ struct AcidProfile {
 
     bool operator==(const AcidProfile& other) const { return id == other.id; }
 };
-
 using AcidContainer = QVector<AcidProfile>;
-// using QAcidMap = QMap<QString, AcidProfile>;
 Q_DECLARE_METATYPE(AcidProfile)
 
 struct AdditiveProfile {
@@ -83,8 +98,15 @@ struct AdditiveProfile {
     bool operator==(const AdditiveProfile& other) const { return id == other.id; }
 };
 using AdditiveContainer = QVector<AdditiveProfile>;
-// using QAdditiveMap = QMap<QString, AdditiveProfile>;
 Q_DECLARE_METATYPE(AdditiveProfile)
+
+// Профиль базовых жидкостей
+struct BaseLiquidProfile {
+    qint32 id;
+    ComponentName name;
+    QString inci;
+};
+
 
 // ------------------------------- //
 // Input - Входные параметры
@@ -103,22 +125,24 @@ struct AcidInput {
     qreal percent; // Процент от общей массы
 };
 
+
+
 // --------------------------------- //
 struct PercentParameters {
-    qreal potassium = 0;       // Процент гидроксида калия
-    qreal sodium = 100;    // Процент гидроксида натрия
-    qreal water = 33;    // Процент воды от общей массы масел
-    qreal superfat = 5;  // Пережир
+    qreal potassium = 0; // Процент гидроксида калия
+    qreal sodium = 100; // Процент гидроксида натрия
+    qreal baseLiquid = 33; // Процент воды от общей массы масел
+    qreal superfat = 5; // Пережир
     qreal additionalSuperfat = 0; // Дополнительный пережир (исп. в холодном способе)
 };
 
 struct RecipeInput {
-    qreal baseLipidMass;               // Общая масса липидов
-    PercentParameters basePercents;    // Проценты базовых параметров
+    qreal baseLipidMass; // Общая масса липидов
+    PercentParameters basePercents; // Проценты базовых параметров
 
-    QVector<LipidInput> lipids;         // липиды
-    QVector<AdditiveInput> additives;   // дополнительные ингредиенты
-    QVector<AcidInput> acids;           // кислоты
+    QVector<LipidInput> lipids; // липиды
+    QVector<AdditiveInput> additives; // дополнительные ингредиенты
+    QVector<AcidInput> acids; // кислоты
 };
 
 // ------------------------------------- //
@@ -140,17 +164,25 @@ struct AcidOutput {
 
 // ---------------- //
 struct MassParameters {
-    qreal water = 0; // Вода в граммах
+    qreal baseLiquid = 0; // Вода в граммах
     qreal NaOH = 0;  // Гидроксид натрия в граммах
     qreal KOH = 0;    // Гидроксид калия в граммах
     qreal additonalSuperfat = 0;
 };
 
 struct RecipeOutput {
+    QString title; // Название рецепта
+    QString baseLiquidName; // Название жидкости
+    QString comment; // Комментарий к рецепту
+
     QVector<LipidOutput> lipids;
     QVector<AdditiveOutput> additives; // дополнительные ингредиенты
     QVector<AcidOutput> acids;     // дополнительные ингредиенты
+
+    PercentParameters basePercents; // Проценты базовых параметров
     MassParameters baseMasses;
+
+    qreal ins; // Сбалансированность рецепта
 };
 
 

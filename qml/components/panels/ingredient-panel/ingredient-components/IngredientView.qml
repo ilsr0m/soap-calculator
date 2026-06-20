@@ -27,7 +27,7 @@ Rectangle {
             id: viewDelegate
 
             width: ListView.view.width
-            height: listArea.height * 0.2
+            height: listArea.height * 0.06
 
             RowLayout {
                 anchors.fill: parent
@@ -65,7 +65,7 @@ Rectangle {
                         color: viewDelegate.contentColor
 
                         text: model.name
-                        font.pixelSize: listArea.height * 0.1
+                        font.pixelSize: listArea.height * 0.04
                         font.bold: true
                     }
                 }

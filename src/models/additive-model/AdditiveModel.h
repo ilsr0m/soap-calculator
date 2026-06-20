@@ -5,7 +5,6 @@
 #include <QAbstractListModel>
 
 #include "SoapTypes.h"
-#include <QHash>
 
 class AdditiveModel : public QAbstractListModel
 {
@@ -17,11 +16,13 @@ public:
 
     int rowCount(const QModelIndex& parent = {}) const override;
     QVariant data(const QModelIndex& index, int role) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
 private:
     AdditiveContainer _additives;
+    QSet<qint32> _checkedItems;
 };
 
 #endif // ACID_MODEL_H

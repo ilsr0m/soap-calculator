@@ -24,7 +24,7 @@ public:
     }
 
     inline InputBuilder& withWater(const double value) {
-        _input.basePercents.water = value;
+        _input.basePercents.baseLiquid = value;
         return *this;
     }
 

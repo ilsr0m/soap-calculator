@@ -11,7 +11,7 @@ Rectangle {
 
     property int gap: 6
 
-    property string title: qsTr("TITLE")
+    // property string title: qsTr("TITLE")
     property string searchWatermark: qsTr("SEARCH...")
     property string addButtonText : qsTr("ADD TO RECIPE")
     property string infoButtonText: qsTr("INFO")
@@ -25,15 +25,15 @@ Rectangle {
         anchors.margins: root.gap
         spacing: root.gap
 
-        IngredientTitle {
-            Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.1
-            titleText: root.title
-        }
+        // IngredientTitle {
+        //     Layout.fillWidth: true
+        //     Layout.preferredHeight: parent.height * 0.1
+        //     titleText: root.title
+        // }
 
         IngredientSearch {
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.10
+            Layout.preferredHeight: parent.height * 0.05
             watermark: root.searchWatermark
             model: root.model
         }
@@ -46,7 +46,7 @@ Rectangle {
 
         IngredientButtons {
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.12
+            Layout.preferredHeight: parent.height * 0.05
 
             infoButtonText: root.infoButtonText
             addButtonText : root.addButtonText

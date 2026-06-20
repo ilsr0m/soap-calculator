@@ -3,10 +3,8 @@
 
 #include <QObject>
 #include <QAbstractListModel>
-#include <QHash>
 
 #include "SoapTypes.h"
-
 
 class AcidModel : public QAbstractListModel
 {
@@ -18,6 +16,7 @@ public:
 
     int rowCount(const QModelIndex& parent = {}) const override;
     QVariant data(const QModelIndex& index, int role) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
@@ -27,6 +26,7 @@ private:
 
 private:
     AcidContainer _acids;
+    QSet<qint32> _checkedItems;
     // QList<int> _roles = {Roles::IdRole, Roles::NameRole};
 };
 
