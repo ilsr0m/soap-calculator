@@ -4,109 +4,7 @@
 #include <QVector>
 #include <QString>
 #include <QMetaType>
-
-// TODO: Добавить рекомендации к additives (например, рекомендуется добавлять до 2% и т. д.) (qreal)
-// TODO: Добавить жирокислотный состав для липидов
-
-struct ComponentName {
-    QString en;
-    QString ru;
-    QString value(const QString& lang) const {
-        if (lang == "ru")
-            return ru;
-        if (lang == "en")
-            return en;
-        return en;
-    }
-};
-
-/**
- * @brief Свойства липида
- */
-struct LipidProperties {
-    qreal hardness = 0;
-    qreal cleansing = 0;
-    qreal conditioning = 0;
-    qreal bubbly = 0;
-    qreal creamy = 0;
-    qreal iodine = 0;
-};
-
-/**
- * @brief Жирнокислотный состав
- */
-struct FattyComposition {
-    qreal lauric;   // Лауриновая кислота
-    qreal myristic; // Миристиновая кислота
-    qreal palmitic; // Пальмитиновая кислота
-    qreal stearic; // Стеариновая кислота
-    qreal ricinoleic; // Рицинолевая кислота
-    qreal oleic; // Олеиновая кислота
-    qreal linoleic; // Линолевая кислота
-    qreal linolenic; // Линоленовая кислота
-};
-
-struct Sap {
-    qreal sodium = 0;
-    qreal potassium = 0;
-};
-
-// Профиль каждого липида
-struct LipidProfile {
-    qint32 id;
-
-    ComponentName type; // Тип (Жидкое масло, Твердое масло, Животный жир и т. д.)
-    ComponentName name; // Название липида
-    ComponentName comment; // Комментарий к
-
-    Sap sap; // сапонификационное число
-    LipidProperties properties; // показатели свойств
-    FattyComposition fatties; // состав жирных кислот
-
-    QString inciSodium;
-    QString inciPotassium;
-
-    bool operator==(const LipidProfile& other) const { return id == other.id; }
-};
-using LipidContainer = QVector<LipidProfile>;
-Q_DECLARE_METATYPE(LipidProfile)
-
-struct AcidProfile {
-    qint32 id;
-
-    ComponentName name;
-    ComponentName comment;
-
-    Sap neutralization;
-
-    QString inciSodium;
-    QString inciPotassium;
-
-    bool operator==(const AcidProfile& other) const { return id == other.id; }
-};
-using AcidContainer = QVector<AcidProfile>;
-Q_DECLARE_METATYPE(AcidProfile)
-
-struct AdditiveProfile {
-    qint32 id;
-
-    ComponentName type;
-    ComponentName name;
-    ComponentName comment;
-
-    QString inci;
-    bool operator==(const AdditiveProfile& other) const { return id == other.id; }
-};
-using AdditiveContainer = QVector<AdditiveProfile>;
-Q_DECLARE_METATYPE(AdditiveProfile)
-
-// Профиль базовых жидкостей
-struct BaseLiquidProfile {
-    qint32 id;
-    ComponentName name;
-    QString inci;
-};
-
+#include "SoapProfiles.h"
 
 // ------------------------------- //
 // Input - Входные параметры
@@ -124,8 +22,6 @@ struct AcidInput {
     AcidProfile profile;
     qreal percent; // Процент от общей массы
 };
-
-
 
 // --------------------------------- //
 struct PercentParameters {

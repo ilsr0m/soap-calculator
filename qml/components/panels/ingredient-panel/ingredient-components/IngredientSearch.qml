@@ -46,7 +46,7 @@ Rectangle {
                         height: parent.height
                         width: parent.width
                         verticalAlignment: TextInput.AlignVCenter
-                        font.pixelSize: parent.height * 0.5
+                        font.pixelSize: parent.height * 0.45
                         font.bold: true
                         clip: true
 

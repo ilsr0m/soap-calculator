@@ -40,8 +40,8 @@ Rectangle {
 
                     BaseCheckbox {
                         id: checkbox
-                        width: parent.width * 0.8
-                        height: parent.height * 0.8
+                        width: parent.width * 0.5
+                        height: parent.height * 0.5
                         anchors.centerIn: parent
 
                         accentColor: viewDelegate.contentColor
@@ -65,7 +65,7 @@ Rectangle {
                         color: viewDelegate.contentColor
 
                         text: model.name
-                        font.pixelSize: listArea.height * 0.04
+                        font.pixelSize: listArea.height * 0.02
                         font.bold: true
                     }
                 }

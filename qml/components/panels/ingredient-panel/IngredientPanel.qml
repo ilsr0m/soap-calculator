@@ -33,7 +33,7 @@ Rectangle {
 
         IngredientSearch {
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height * 0.05
+            Layout.preferredHeight: parent.height * 0.04
             watermark: root.searchWatermark
             model: root.model
         }

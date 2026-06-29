@@ -47,6 +47,8 @@ set(INCLUDES
     include/SoapTypes.h
     include/utils.h
     include/roles/ModelRoles.h
+    include/SoapProfiles.h
+    include/SoapInOut.h
 )
 
 set(OTHER_FILES
@@ -129,7 +131,8 @@ qt_add_qml_module(${APPLICATION_NAME}
         qml/Main.qml
         ${BASE_COMPONENTS}
         ${PANELS_COMPONENTS}
-        qml/themes/Theme.qml 
+        qml/themes/Theme.qml
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

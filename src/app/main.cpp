@@ -5,7 +5,7 @@
 #include <qqml.h>
 
 // #include "soap_core.h"
-#include "ijson_repository.h"
+//#include "ijson_repository.h"
 #include "DatabaseManager.h"
 
 #include "LipidModel.h"
